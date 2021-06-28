@@ -1,0 +1,134 @@
+.user-register {
+    border: 1px solid;
+    border-radius: 4px;
+    margin: 32px auto;
+    width: 800px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    user-select: none;
+}
+
+.user-register input:focus {
+    border-bottom-color: blue;
+}
+
+.user-register p {
+    font-weight: bold;
+    text-align: left;
+    user-select: none;
+}
+
+.user-register i {
+    user-select: none;
+}
+
+.user-register span {
+    color: red;
+}
+
+.user-register input {
+    font-size: 16px;
+    width: 260px;
+    outline: none;
+    border: none;
+    border-bottom: groove;
+}
+
+.user-register_form {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.user-register_form__validate {
+    color: red;
+    text-align: left;
+}
+
+.user-register_form__response-register {
+    text-align: center;
+}
+
+.user-register_form__response-register span {
+    font-weight: bold;
+    color: green;
+    text-align: center;
+}
+
+.user-register_form__form1 {
+    margin: 60px 20px 20px 20px;
+}
+
+.user-register_form__form2 {
+    margin: 60px 20px 20px 20px;
+}
+
+.user-register_button__returnloginbutton {
+    margin: 20px 20px 20px 32px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-weight: bold;
+    box-shadow: 0 2px tomato;
+    transition: box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.user-register_button__returnloginbutton:hover {
+    box-shadow: 0 3px blue;
+    color: red;
+}
+
+.user-register_button__registerbutton input {
+    border: none;
+}
+
+.user-register_form__fullname {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-self: center;
+}
+
+.user-register_form__fullname input {
+    width: 120px;
+}
+
+.user-register_form__fullname___firstname {
+    margin: 0 16px 0 0;
+}
+
+.user-register_button__registerbutton input {
+    cursor: pointer;
+    width: 120px;
+    font-weight: bold;
+    height: 32px;
+    border: groove;
+    border-radius: 4px;
+    margin: 40px 0 40px 60px;
+}
+
+.user-register_button__registerbutton input:hover {
+    color: blue;
+}
+
+.user-register_button__registerbutton input:focus {
+    color: red;
+}
+
+.user-register_form__genderchoose select {
+    border: none;
+    border-bottom: groove;
+    width: 240px;
+    float: left;
+}
+
+.user-register_form__genderchoose select:focus {
+    border-bottom-color: blue;
+    outline: none;
+}

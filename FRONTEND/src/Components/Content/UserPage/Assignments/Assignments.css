@@ -1,0 +1,236 @@
+.user-assignments {
+    width: 100%;
+    height: 100%;
+    user-select: none;
+}
+
+.user-assignments_all__list {
+    text-align: left;
+    width: 100%;
+    height: 100%;
+}
+
+.user-assignments_all__list___title-and-turnin {
+    width: 100%;
+    text-align: left;
+    height: 53px;
+    font-weight: bold;
+    line-height: 50px;
+    background-color: rgb(218, 218, 218);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
+
+.user-assignments_all__list___title-and-turnin____title {
+    margin: 0 0 0 24px;
+    width: 88%;
+}
+
+.user-assignments_all__list___title-and-turnin____turnin button {
+    height: 32px;
+    width: 100px;
+    margin: 0 32px 0 -28px;
+    border-style: groove;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.user-assignments_all__list___content {
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    height: 500px;
+}
+
+.user-assignments_all__list___content____unfinished_____show-content-button {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    font-weight: bold;
+}
+
+.user-assignments_all__list___content____unfinished_____show-content-button div p {
+    font-size: 20px;
+    color: grey;
+    cursor: pointer;
+}
+
+.user-assignments_all__list___content____finished_____show-content-button {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    font-weight: bold;
+}
+
+.user-assignments_all__list___content____finished_____show-content-button div p {
+    font-size: 20px;
+    color: grey;
+    cursor: pointer;
+}
+
+/*==========================================================================================================================*/
+
+.user-assignments_all__list___content_____unfinished______assignment-item {
+    border: 1.2px solid black;
+    width: 97.8%;
+    border-radius: 4px;
+    margin: 4px 0 0 12px;
+    height: 74px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
+
+/* .user-assignments_all__list___content_____unfinished______assignment-item div:first-child {
+    width: 100%;
+} */
+
+.user-assignments_all__list___content_____unfinished______assignment-item_______content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+}
+
+.user-assignments_all__list___content_____unfinished______assignment-item_______content div:nth-child(3) {
+    width: 12%;
+    /* border: groove; */
+    text-align: center;
+}
+
+.user-assignments_all__list___content_____unfinished______assignment-item_______content_______first-item {
+    border: 1.2px solid black;
+    width: 80%;
+    margin: 0 0 0 4px;
+    height: 70px;
+}
+
+.user-assignments_all__list___content_____unfinished______assignment-item_______content_______first-item div:last-child {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
+
+.user-assignments_all__list___content_____unfinished______assignment-item_______content_______first-item div:last-child div {
+    margin: 0 200px 0 0;
+}
+
+.user-assignments_all__list___content_____unfinished______assignment-item_______content_______second-item {
+    border: 1.2px solid black;
+    width: 80%;
+    margin: 0 0 0 4px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    height: 70px;
+}
+
+.user-assignments_all__list___content_____unfinished______assignment-item_______content_______second-item div:first-child {
+    margin: 0 0 0 12px;
+}
+
+.user-assignments_all__list___content_____unfinished______assignment-item_______content_______second-item div:nth-child(2) {
+    margin: 0 0 0 12px;
+    width: 80%;
+    /* border: groove; */
+}
+
+.user-assignments_all__list___content_____unfinished______assignment-item_______content_______third-item {
+    border: 1.2px solid black;
+    width: 80%;
+    margin: 0 0 0 4px;
+    height: 70px;
+}
+
+.user-assignments_all__list___content_____unfinished______assignment-item_______content_______fourth-item {
+    border: 1.2px solid black;
+    width: 80%;
+    margin: 0 0 0 4px;
+    height: 70px;
+}
+
+/*==========================================================================================================================*/
+
+.user-assignments_all__list___content_____finished______assignment-item {
+    border: 1.2px solid black;
+    width: 97.8%;
+    border-radius: 4px;
+    margin: 4px 0 0 12px;
+    height: 74px;
+}
+
+.user-assignments_all__list___content_____finished______assignment-item_______content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
+
+.user-assignments_all__list___content_____finished______assignment-item_______content div:nth-child(3) {
+    width: 12%;
+    /* border: groove; */
+    text-align: center;
+}
+
+.user-assignments_all__list___content_____finished______assignment-item_______content_______first-item {
+    /* border: 1.2px solid black; */
+    width: 80%;
+    margin: 0 0 0 4px;
+    height: 70px;
+}
+
+.user-assignments_all__list___content_____finished______assignment-item_______content_______first-item div:last-child {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
+
+.user-assignments_all__list___content_____finished______assignment-item_______content_______first-item div:last-child div {
+    margin: 0 200px 0 0;
+}
+
+.user-assignments_all__list___content_____finished______assignment-item_______content_______second-item {
+    /* border: 1.2px solid black; */
+    width: 80%;
+    margin: 0 0 0 4px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    height: 70px;
+}
+
+.user-assignments_all__list___content_____finished______assignment-item_______content_______second-item div:first-child {
+    margin: 0 0 0 12px;
+}
+
+.user-assignments_all__list___content_____finished______assignment-item_______content_______second-item div:nth-child(2) {
+    margin: 0 0 0 12px;
+    width: 80%;
+    /* border: groove; */
+}
+
+.user-assignments_all__list___content_____finished______assignment-item_______content_______third-item {
+    /* border: 1.2px solid black; */
+    width: 80%;
+    margin: 0 0 0 4px;
+    height: 70px;
+}
+
+.user-assignments_all__list___content_____finished______assignment-item_______content_______fourth-item {
+    /* border: 1.2px solid black; */
+    width: 80%;
+    margin: 0 0 0 4px;
+    height: 70px;
+}
+
+/*==========================================================================================================================*/

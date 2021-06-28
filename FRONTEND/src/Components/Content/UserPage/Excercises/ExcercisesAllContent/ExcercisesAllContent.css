@@ -1,0 +1,524 @@
+.user-excercises_all-list {
+    width: 100%;
+    height: 100%;
+}
+
+.user-excercises_all-list__select-choose {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin: 16px 0 0 0;
+    padding: 0 0 16px 0;
+    border-bottom: 2px solid black;
+}
+
+.user-excercises_all-list__select-choose___search {
+    flex: 1;
+}
+
+.user-excercises_all-list__select-choose___search input {
+    height: 24px;
+}
+
+.user-excercises_all-list__select-choose___search input:first-child {
+    width: 80%;
+    outline: none;
+    border: none;
+    border-bottom: groove;
+    margin: 0 12px 0 0;
+}
+
+.user-excercises_all-list__select-choose___search input:last-child {
+    cursor: pointer;
+}
+
+.user-excercises_all-list__select-choose___search input:first-child:focus {
+    border-bottom-color: green;
+}
+
+.user-excercises_all-list__select-choose span {
+    font-weight: bold;
+}
+
+.user-excercises_all-list__select-choose___excercise-list {
+    margin: 0 40px 0 0;
+}
+
+.user-excercises_all-list__select-choose___excercise-list input {
+    margin: 0 0 0 40px;
+    cursor: pointer;
+}
+
+/*================================================================*/
+
+.user-excercises_all__public-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.user-excercises_all__public-list___content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.user-excercises_all__public-list___title {
+    margin: 0 0 0 28px;
+}
+
+.user-excercises_all__public-list___title p {
+    font-weight: bold;
+}
+
+.user-excercises_all__public-list___choice-index-content {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    height: 300px;
+    user-select: none;
+    /* border: groove; */
+    width: 99.5%;
+}
+
+.user-excercises_all__public-list___choice-index-content div {
+    height: 260px;
+    width: 260px;
+    background-color: rgb(197, 194, 194);
+    margin: 20px 20px 20px 28px;
+    cursor: pointer;
+}
+
+.user-excercises_all__public-list___choice-index-content div:hover {
+    background-color: rgb(219, 219, 219);
+}
+
+.user-excercises_all__public-list___control {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    margin: 0 auto;
+}
+
+.user-excercises_all__public-list___control i {
+    font-weight: bold;
+    color: blue;
+    cursor: pointer;
+    margin: 0 32px 0 32px;
+    user-select: none;
+}
+
+.user-excercises_all__public-list___control____index-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.user-excercises_all__public-list___control____index-item div {
+    margin: 0 12px 0 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.user-excercises_all__public-list___control____index-item div:hover {
+    color: rgb(255, 0, 0);
+}
+
+/*================================================================*/
+
+.user-excercises_all-list__public-list___public-item {
+    widows: 100%;
+    height: 100%;
+}
+
+.user-excercises_all-list__public-list___public-item button {
+    cursor: pointer;
+    margin: 36px 0 0 0;
+    border: 1px solid black;
+    border-radius: 4px;
+    outline: none;
+}
+
+.user-excercises_all-list__public-list___public-item_____backtopubliclist {
+    margin: 40px 0 0 40px;
+    border: none;
+    width: 100px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-shadow: 0 2px tomato;
+    transition: box-shadow 0.3s;
+}
+
+.user-excercises_all-list__public-list___public-item_____backtopubliclist:hover {
+    color: red;
+    box-shadow: 0 3px rgb(0, 255, 64);
+}
+
+.user-excercises_all-list__public-list___public-item_____excercise-logo-and-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 40px 0 0 40px;
+}
+
+.user-excercises_all-list__public-list___public-item_____excercise-logo {
+    width: 32%;
+}
+
+.user-excercises_all-list__public-list___public-item_____excercise-logo p {
+    font-weight: bold;
+    text-align: left;
+}
+
+.user-excercises_all-list__public-list___public-item_____excercise-logo img {
+    width: 160px;
+    height: 160px;
+}
+
+.user-excercises_all-list__public-list___public-item_____excercise-content {
+    /* border: groove; */
+    flex: 1;
+}
+
+.user-excercises_all-list__public-list___public-item_____excercise-content p {
+    font-weight: bold;
+    text-align: left;
+    word-wrap: break-word;
+    word-break: break-all;
+    color: royalblue;
+}
+
+.user-excercises_all-list__public-list___public-item_____excercise-content span {
+    font-weight: bold;
+    color: black;
+}
+
+.user-excercises_all-list__public-list___public-item____button-choose {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.user-excercises_all-list__public-list___public-item_____backtopublicitem {
+    margin: 40px 0 0 40px;
+    border: none;
+    width: 100px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-shadow: 0 2px tomato;
+    transition: box-shadow 0.3s;
+}
+
+.user-excercises_all-list__public-list___public-item_____backtopublicitem:hover {
+    color: red;
+    box-shadow: 0 3px rgb(0, 255, 64);
+}
+
+.user-excercises_all-list__public-list___public-item_____table-list {
+    margin: 40px 0 0 0;
+    font-weight: bold;
+}
+
+.user-excercises_all-list__public-list___public-item_____table-list table {
+    width: 100%;
+}
+
+.user-excercises_all-list__public-list___public-item_____table-list table th {
+    font-size: 20px;
+}
+
+.user-excercises_all-list__public-list___public-item_____table-list table td {
+    margin: 20px 0 0 0;
+    color: rgb(25, 0, 255);
+}
+
+/*================================================================*/
+
+.user-excercises_all-list__private-list___private-item {
+    widows: 100%;
+    height: 100%;
+}
+
+.user-excercises_all-list__private-list___private-item button {
+    cursor: pointer;
+    margin: 36px 0 0 0;
+    border: 1px solid black;
+    border-radius: 4px;
+    outline: none;
+}
+
+.user-excercises_all-list__private-list___private-item_____backtoprivatelist {
+    margin: 40px 0 0 40px;
+    border: none;
+    width: 100px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-shadow: 0 2px tomato;
+    transition: box-shadow 0.3s;
+}
+
+.user-excercises_all-list__private-list___private-item_____backtoprivatelist:hover {
+    color: red;
+    box-shadow: 0 3px rgb(0, 255, 64);
+}
+
+.user-excercises_all-list__private-list___private-item_____excercise-logo-and-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 40px 0 0 40px;
+}
+
+.user-excercises_all-list__private-list___private-item_____excercise-logo {
+    width: 32%;
+}
+
+.user-excercises_all-list__private-list___private-item_____excercise-logo p {
+    font-weight: bold;
+    text-align: left;
+}
+
+.user-excercises_all-list__private-list___private-item_____excercise-logo img {
+    width: 160px;
+    height: 160px;
+}
+
+.user-excercises_all-list__private-list___private-item_____excercise-content p {
+    font-weight: bold;
+    text-align: left;
+}
+
+.user-excercises_all-list__private-list___private-item____button-choose {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+/*================================================================*/
+
+.user-excercises_all-list__owned-list___owned-item {
+    widows: 100%;
+    height: 100%;
+}
+
+.user-excercises_all-list__owned-list___owned-item button {
+    cursor: pointer;
+    margin: 36px 0 0 0;
+    border: 1px solid black;
+    border-radius: 4px;
+    outline: none;
+}
+
+.user-excercises_all-list__owned-list___owned-item_____backtoownedlist {
+    margin: 40px 0 0 40px;
+    border: none;
+    width: 100px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-shadow: 0 2px tomato;
+    transition: box-shadow 0.3s;
+}
+
+.user-excercises_all-list__owned-list___owned-item_____backtoownedlist:hover {
+    color: red;
+    box-shadow: 0 3px rgb(0, 255, 64);
+}
+
+.user-excercises_all-list__owned-list___owned-item_____excercise-logo-and-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 40px 0 0 40px;
+}
+
+.user-excercises_all-list__owned-list___owned-item_____excercise-logo {
+    width: 32%;
+}
+
+.user-excercises_all-list__owned-list___owned-item_____excercise-logo p {
+    font-weight: bold;
+    text-align: left;
+}
+
+.user-excercises_all-list__owned-list___owned-item_____excercise-logo img {
+    width: 160px;
+    height: 160px;
+}
+
+.user-excercises_all-list__owned-list___owned-item_____excercise-content {
+    /* border: groove; */
+    flex: 1;
+}
+
+.user-excercises_all-list__owned-list___owned-item_____excercise-content p {
+    font-weight: bold;
+    text-align: left;
+    word-wrap: break-word;
+    word-break: break-all;
+    color: royalblue;
+}
+
+.user-excercises_all-list__owned-list___owned-item_____excercise-content span {
+    font-weight: bold;
+    color: black;
+}
+
+.user-excercises_all-list__owned-list___owned-item____button-choose {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.user-excercises_all-list__owned-list___owned-item_____backtoowneditem {
+    margin: 40px 0 0 40px;
+    border: none;
+    width: 100px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-shadow: 0 2px tomato;
+    transition: box-shadow 0.3s;
+}
+
+.user-excercises_all-list__owned-list___owned-item_____backtoowneditem:hover {
+    color: red;
+    box-shadow: 0 3px rgb(0, 255, 64);
+}
+
+.user-excercises_all-list__owned-list___owned-item_____table-list {
+    margin: 40px 0 0 0;
+    font-weight: bold;
+}
+
+.user-excercises_all-list__owned-list___owned-item_____table-list table {
+    width: 100%;
+}
+
+.user-excercises_all-list__owned-list___owned-item_____table-list table th {
+    font-size: 20px;
+}
+
+.user-excercises_all-list__owned-list___owned-item_____table-list table td {
+    margin: 20px 0 0 0;
+    color: rgb(25, 0, 255);
+}
+
+/*================================================================*/
+
+.user-excercises_all__owned-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.user-excercises_all__owned-list___content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.user-excercises_all__owned-list___title {
+    margin: 0 0 0 28px;
+}
+
+.user-excercises_all__owned-list___title p {
+    font-weight: bold;
+}
+
+.user-excercises_all__owned-list___choice-index-content {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    height: 300px;
+    user-select: none;
+    /* border: groove; */
+    width: 99.5%;
+}
+
+.user-excercises_all__owned-list___choice-index-content div {
+    height: 260px;
+    width: 260px;
+    background-color: rgb(197, 194, 194);
+    margin: 20px 20px 20px 28px;
+    cursor: pointer;
+}
+
+.user-excercises_all__owned-list___choice-index-content div:hover {
+    background-color: rgb(219, 219, 219);
+}
+
+.user-excercises_all__owned-list___control {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    margin: 0 auto;
+}
+
+.user-excercises_all__owned-list___control i {
+    font-weight: bold;
+    color: blue;
+    cursor: pointer;
+    margin: 0 32px 0 32px;
+    user-select: none;
+}
+
+.user-excercises_all__owned-list___control____index-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.user-excercises_all__owned-list___control____index-item div {
+    margin: 0 12px 0 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.user-excercises_all__owned-list___control____index-item div:hover {
+    color: rgb(255, 0, 0);
+}

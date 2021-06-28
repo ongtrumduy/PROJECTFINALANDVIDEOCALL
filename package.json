@@ -1,0 +1,25 @@
+{
+  "name": "ver-1.0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "cd FRONTEND && npm start",
+    "server": "cd BACKEND && npm start",
+    "start": "concurrently --kill-others-on-fail \"npm run client\" \"npm run server\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ongtrumduy/PROJECT-FINAL.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ongtrumduy/PROJECT-FINAL/issues"
+  },
+  "homepage": "https://github.com/ongtrumduy/PROJECT-FINAL#readme",
+  "dependencies": {
+    "concurrently": "^6.0.2"
+  }
+}

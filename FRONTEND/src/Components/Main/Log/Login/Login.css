@@ -1,0 +1,125 @@
+.user-login {
+    border: 1px solid;
+    border-radius: 4px;
+    margin: 100px auto;
+    width: 300px;
+    height: 376px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.user-login_form p {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: left;
+    margin: 32px 0 8px 20px;
+    user-select: none;
+}
+
+.user-login_form i {
+    user-select: none;
+}
+
+.user-login_form span {
+    color: rgb(255, 0, 0);
+}
+
+.user-login_form input {
+    height: 30px;
+    width: 260px;
+    border: none;
+    outline: none;
+    border-bottom: groove;
+    margin: 0 0 0 16px;
+    font-size: 16px;
+}
+
+.user-login_form input:focus {
+    border-bottom-color: green;
+}
+
+.user-login_form__validate {
+    color: red;
+    text-align: left;
+    margin: 0 0 0 20px;
+}
+
+.user-login_form__response-login {
+    color: green;
+    font-weight: bold;
+    margin: 40px 0 -64px 0;
+}
+
+.user-login_button {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-login_button__loginbutton {
+    margin: 72px 0 24px 20px;
+}
+
+.user-login_button__loginbutton input {
+    cursor: pointer;
+    height: 32px;
+    width: 100px;
+    border-style: groove;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.user-login_button__loginbutton input:hover {
+    color: red;
+}
+
+.user-login_button__loginbutton input:focus {
+    color: blue;
+    outline: none;
+}
+
+.user-login_button div:last-child {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.user-login_button__forgotbutton input {
+    border: none;
+    font-weight: bold;
+    margin: 0 0 0 20px;
+    text-decoration: underline;
+    cursor: pointer;
+    font-style: italic;
+}
+
+.user-login_button__forgotbutton input:hover {
+    color: red;
+}
+
+.user-login_button__forgotbutton input:focus {
+    color: blue;
+    outline: none;
+}
+
+.user-login_button__registerbutton input {
+    border: none;
+    font-weight: bold;
+    margin: 0 0 0 60px;
+    text-decoration: underline;
+    cursor: pointer;
+    font-style: italic;
+}
+
+.user-login_button__registerbutton input:hover {
+    color: red;
+}
+
+.user-login_button__registerbutton input:focus {
+    color: blue;
+    outline: none;
+}

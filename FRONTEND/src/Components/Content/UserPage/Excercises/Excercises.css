@@ -1,0 +1,44 @@
+.user-excercises {
+    height: 100%;
+    /* user-select: none; */
+}
+
+.user-excercises_all {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /* height: 100%; */
+}
+
+.user-excercises_all__control {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    background-color: rgb(218, 218, 218);
+}
+
+.user-excercises_all__control___title {
+    width: 60%;
+    text-align: left;
+    font-weight: bold;
+    margin: 0 0 0 24px;
+}
+
+.user-excercises_all__control___button {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.user-excercises_all__control___button button {
+    height: 32px;
+    margin: 0 32px 0 -28px;
+    border-style: groove;
+    border-radius: 4px;
+    cursor: pointer;
+}

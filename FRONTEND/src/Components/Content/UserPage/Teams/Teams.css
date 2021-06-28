@@ -1,0 +1,415 @@
+.user-teams {
+    height: 100%;
+}
+
+.user-teams_all {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow: auto;
+}
+
+.user-teams_all__control {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    background-color: rgb(218, 218, 218);
+}
+
+.user-teams_all__control___title {
+    width: 60%;
+    text-align: left;
+    font-weight: bold;
+    margin: 0 0 0 24px;
+}
+
+.user-teams_all__control___title p {
+    user-select: none;
+}
+
+.user-teams_all__control___button {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    user-select: none;
+}
+
+.user-teams_all__control___button button {
+    height: 32px;
+    margin: 0 32px 0 -28px;
+    border-style: groove;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.user-teams_all__list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow: auto;
+    height: 500px;
+    user-select: none;
+    width: 100%;
+}
+
+.user-teams_all__list p {
+    font-weight: bold;
+    /* margin: 40px 0 0 20px; */
+}
+
+/* .user-teams_all__list div {
+    height: 260px;
+    width: 260px;
+    background-color: rgb(197, 194, 194);
+    margin: 20px 20px 20px 28px;
+    cursor: pointer;
+}
+
+.user-teams_all__list div:hover {
+    background-color: rgb(219, 219, 219);
+} */
+
+.user-teams_all__list___team-item____delete {
+    height: 260px;
+    width: 260px;
+    background-color: rgb(197, 194, 194);
+    margin: 20px 20px 20px 28px;
+    cursor: pointer;
+}
+
+.user-teams_all__list___team-item____delete:hover {
+    background-color: rgb(219, 219, 219);
+}
+
+.user-teams_all__list___team-item____delete div {
+    /* border: groove; */
+    height: 98%;
+    position: relative;
+    bottom: 28px;
+}
+
+.user-teams_all__list___team-item____delete i {
+    position: relative;
+    width: 40px;
+    left: 110px;
+    top: 4px;
+    z-index: 1000;
+}
+
+.user-teams_all__list___team-item____delete i:hover {
+    color: blue;
+}
+
+.user-teams_all__list___team-item____delete span {
+    width: 60px;
+    background-color: white;
+    font-weight: bold;
+    border-radius: 4px;
+    color: royalblue;
+    font-size: 20px;
+    z-index: 1000;
+    position: relative;
+    left: 72px;
+    top: 24px;
+}
+
+.user-teams_all__list___team-item____delete span:hover {
+    color: red;
+}
+
+.user-teams_all__list___team-item____delete img {
+    height: 60px;
+    width: 60px;
+    margin: 32px 0 0 0;
+}
+
+.user-teams_all__list___team-item____non-delete {
+    height: 260px;
+    width: 260px;
+    background-color: rgb(197, 194, 194);
+    margin: 20px 20px 20px 28px;
+    cursor: pointer;
+}
+
+.user-teams_all__list___team-item____non-delete:hover {
+    background-color: rgb(219, 219, 219);
+}
+
+.user-teams_all__list___team-item____non-delete div {
+    /* border: groove; */
+    height: 98%;
+    position: relative;
+    bottom: 27px;
+}
+
+.user-teams_all__list___team-item____non-delete i {
+    position: relative;
+    width: 40px;
+    left: 110px;
+    top: 4px;
+    z-index: 1000;
+}
+
+.user-teams_all__list___team-item____non-delete i:hover {
+    color: blue;
+}
+
+.user-teams_all__list___team-item____non-delete img {
+    height: 60px;
+    width: 60px;
+    margin: 32px 0 0 0;
+}
+
+.user-teams_create {
+    user-select: none;
+    height: 100%;
+}
+
+.user-teams_create__backtoteamall {
+    margin: 40px 0 0 40px;
+    border: none;
+    width: 100px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-shadow: 0 2px tomato;
+    transition: box-shadow 0.3s;
+}
+
+.user-teams_create__backtoteamall:hover {
+    box-shadow: 0 3px rgb(0, 255, 64);
+    color: red;
+}
+
+.user-teams_create__team {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    user-select: none;
+}
+
+.user-teams_create__team___form {
+    background-color: rgb(255, 255, 255);
+    margin: 8px 0 0 120px;
+    width: 64%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.user-teams_create__team___form input {
+    width: 100%;
+}
+
+.user-teams_create__team___form div:first-child {
+    width: 72%;
+}
+
+.user-teams_create__team___form div:last-child {
+    margin: 80px 0 0 40px;
+    width: 80%;
+}
+
+.user-teams_create__team___form div:last-child button {
+    border-style: groove;
+    border-radius: 4px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.user-teams_create__team___form div:last-child button:focus {
+    background-color: rgb(196, 196, 196);
+}
+
+.user-teams_create__team___form p {
+    font-weight: bold;
+    text-align: left;
+}
+
+.user-teams_create__team___form input {
+    border: none;
+    border-bottom: groove;
+    border-color: rgb(226, 226, 226);
+}
+
+.user-teams_create__team___form input:focus {
+    outline: none;
+    border-color: green
+}
+
+.user-teams_create__team___form select {
+    width: 40%;
+    border: none;
+    border-bottom: groove;
+}
+
+.user-teams_create__team___form option {
+    border-color: rgb(226, 226, 226);
+}
+
+.user-teams_create__team___form select:focus {
+    outline: none;
+    border-color: green
+}
+
+.user-teams_create__team___form____radio-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-teams_create__team___form____radio-button div {
+    flex: 1
+}
+
+.user-teams_create__team___form____radio-button input {
+    height: 20px;
+    cursor: pointer;
+}
+
+.user-teams_create__team___form____radio-button span {
+    margin: 0 0 0 -100px;
+}
+
+.user-teams_create__team___response-create-team {
+    height: 0px;
+    width: 100%;
+    margin: 0px 0 40px 0;
+    color: green;
+    font-weight: bold;
+}
+
+.user-teams_create__team___validate div {
+    color: red;
+}
+
+.user-teams_create__team___validate div {
+    width: 400px;
+}
+
+.user-teams_create__team___form____create-button input {
+    border: solid 1px black;
+    cursor: pointer;
+    height: 32px;
+    width: 160px;
+    margin: 0 0 0 40px;
+    font-weight: bold;
+}
+
+.user-teams_create__team___form____create-button input:hover {
+    color: rgb(255, 2, 2);
+}
+
+.user-teams_create__team___form____create-button input:focus {
+    color: rgb(91, 2, 255);
+}
+
+.user-teams_create__team___logo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.user-teams_create__team___logo div:first-child {
+    border: groove;
+    margin: 20px 0 0 0;
+    float: left;
+}
+
+.user-teams_create__team___logo div:first-child img {
+    height: 200px;
+    width: 200px;
+}
+
+.user-teams_create__team___logo div:last-child p {
+    font-weight: bold;
+    margin: 12px 0 0 32px;
+}
+
+.user-teams_addcode__backtoteamall {
+    margin: 40px 0 0 40px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    width: 86px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-shadow: 0 2px tomato;
+    transition: box-shadow 0.3s;
+}
+
+.user-teams_addcode__backtoteamall:hover {
+    box-shadow: 0 3px rgb(0, 255, 64);
+    color: red;
+}
+
+.user-teams_addcode__team___form {
+    width: 40%;
+    margin: 20px 0 0 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    user-select: none;
+}
+
+.user-teams_addcode__team___form p {
+    font-weight: bold;
+    text-align: left;
+}
+
+.user-teams_addcode__team___form input {
+    border: none;
+    border-bottom: groove;
+    width: 320px;
+    outline: none;
+}
+
+.user-teams_addcode__team___form input:focus {
+    border-bottom-color: blue;
+}
+
+.user-team_addcode__team___submit-addcode input {
+    margin: 72px 0 0 120px;
+    cursor: pointer;
+    height: 36px;
+    font-weight: bold;
+    border-radius: 4px;
+    width: 100px;
+}
+
+.user-teams_addcode__team___validate {
+    color: rgb(255, 0, 0);
+}
+
+.user-teams_create__team___response-addcode-team {
+    color: green;
+    font-weight: bold;
+    margin: 20px 0 0 40px;
+}
+
+.user-team_addcode__team___submit-addcode input:hover {
+    color: red;
+}
+
+.user-team_addcode__team___submit-addcode input:focus {
+    color: green;
+}

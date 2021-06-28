@@ -1,0 +1,159 @@
+.admin-container {
+  border: groove;
+  color: #000;
+  /* overflow: auto; */
+  /* width: 1400px; */
+  /*height: 900px;  */
+  min-width: 1024px;
+}
+
+.admin-container .admin-content .admin-menu {
+  background-color: #e06c99;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  height: 80px;
+  flex-grow: 0;
+  color: rgb(247, 247, 247);
+  border: groove;
+}
+
+.admin-container .admin-content .admin-menu input {
+  height: 35px;
+  border-radius: 30px;
+  outline: none;
+  margin: 0 5px 0 5px;
+}
+
+.admin-container .admin-content .admin-menu button {
+  border-radius: 40px;
+  outline: none;
+  width: 70px;
+  margin: 0 40px 0 -20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.admin-container .admin-content .admin-menu img {
+  height: 42px;
+  outline: none;
+}
+
+.admin-container .admin-content .admin-menu span {
+  font-style: italic;
+  font-weight: bold;
+  color: blue;
+  font-size: 20px;
+  position: relative;
+  bottom: 25px;
+  right: 1px;
+}
+
+.admin-container .admin-content .admin-menu .admin-menu-logo {
+  height: 70px;
+  width: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-container .admin-content .admin-menu .admin-menu-logo .admin-menu-logo-heart-1 {
+  margin: 0 0 0 120px;
+}
+
+.admin-container .admin-content .admin-menu .admin-menu-logo .admin-menu-logo-heart-2 {
+  margin: 0 50px 0 -15px;
+}
+
+.admin-container .admin-content .admin-menu .admin-menu-search {
+  margin: 0 100px 0 55px;
+  flex: 1;
+}
+
+.admin-container .admin-content .admin-menu .admin-menu-search input {
+  margin: 0 50px 0 10px;
+  width: 100%;
+  height: 45px;
+  border-radius: 10px;
+  font-size: 17px;
+  /* background-image: url("../../Image-Icon/Search.png"); */
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+.admin-container .admin-content .admin-menu .admin-menu-home button {
+  width: 120px;
+  height: 50px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.admin-container .admin-content .admin-menu .admin-menu-firstname button {
+  width: 90px;
+  height: 50px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.admin-container .admin-body {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-end;
+  border: 1px solid white;
+  height: 600px;
+}
+
+.admin-container .admin-body .admin-body-render {
+  border: 1px solid white;
+  width: 80%;
+}
+
+.admin-container .admin-body .admin-body-online {
+  border: 1px solid white;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-grow: 0;
+  margin: 5px 5px 5px 0;
+}
+
+.admin-container .admin-body .admin-body-online .admin-body-online-title {
+  border: groove;
+  background-color: rgba(43, 181, 223, 0.993);
+  height: 100px;
+  text-align: center;
+  font-size: 30px;
+  color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-container .admin-body .admin-body-online .admin-body-online-title img {
+  margin: 0 10px -4px 0;
+}
+
+.admin-container .admin-body .admin-body-online .admin-body-online-render {
+  border: 1px solid white;
+  flex-grow: 6;
+  overflow: auto;
+}
+
+.admin-container .admin-footer {
+  border-style: groove;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: rgb(27, 27, 27);
+  color: white;
+}
+
+.admin-container .admin-footer a {
+  text-decoration: none;
+  color: rgb(113, 240, 120);
+}

@@ -1,0 +1,392 @@
+.user-team_team-menu-and-content__content___notes____create-new {
+    user-select: none;
+    width: 100%;
+}
+
+.user-team_team-menu-and-content__content___notes____create-new p {
+    font-weight: bold;
+}
+
+.user-team_team-menu-and-content__content___notes____create-new-button {
+    border: groove;
+    width: 60px;
+    height: 60px;
+    border-radius: 24px;
+    position: relative;
+    top: -120px;
+    right: 80px;
+    float: right;
+    cursor: move;
+    /* z-index: 1000; */
+    user-select: none;
+    background-color: whitesmoke;
+}
+
+.user-team_team-menu-and-content__content___notes____create-new-button i:hover {
+    color: rgb(38, 0, 255);
+}
+
+.user-team_team-menu-and-content__content___notes____create-new-button i {
+    margin: 8px auto;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.user-team_team-menu-and-content__content___notes____create-new_____create-form______form div:first-child input {
+    width: 100%;
+    outline: none;
+    border: none;
+    border-bottom: groove;
+}
+
+.user-team_team-menu-and-content__content___notes____create-new_____create-form______form div:first-child input:hover {
+    border-bottom-color: blue;
+}
+
+.user-team_team-menu-and-content__content___notes____create-new_____create-form______form div:nth-child(2) {
+    margin: 20px 0 20px 0;
+}
+
+.user-team_team-menu-and-content__content___notes____create-new_____create-form______form div:nth-child(2) input {
+    cursor: pointer;
+}
+
+.user-team_team-menu-and-content__content___notes____create-new_____create-form______submit-create-note {
+    margin: 20px 0 0 160px;
+}
+
+.user-team_team-menu-and-content__content___notes____create-new_____create-form______submit-create-note input {
+    cursor: pointer;
+    width: 120px;
+    background-color: cornsilk;
+}
+
+.user-team_team-menu-and-content__content___notes____create-new_____create-form______input-ID input {
+    outline: none;
+    border: none;
+    border-bottom: groove;
+    width: 100%;
+}
+
+.user-team_team-menu-and-content__content___notes____create-new_____create-form______input-ID input:hover {
+    border-bottom-color: blue;
+}
+
+.user-team_team-menu-and-content__content___notes____create-new_____create-form______excercise-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+}
+
+.user-team_team-menu-and-content__content___notes____create-new_____create-form______excercise-content div:first-child img {
+    height: 36px;
+    width: 36px;
+    margin: 0 8px 0 0;
+}
+
+.user-team_team-menu-and-content__content___notes____create-new_____create-form______excercise-content div:last-child i {
+    cursor: pointer;
+}
+
+.user-team_team-menu-and-content__content___notes____create-new_____create-form______excercise-content div:last-child i:hover {
+    color: blue;
+}
+
+.user-team_team-menu-and-content__content___notes____create-new_____create-form______excercise-content_______content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+}
+
+.user-team_team-menu-and-content__content___notes____create-new_____create-form______excercise-content_______content div:nth-child(2) {
+    width: 80%;
+}
+
+.user-team_team-menu-and-content__content___notes____create-new_____create-form______excercise-content_______add-and-remove-button {
+    user-select: none;
+    font-weight: bold-;
+}
+
+.user-team_team-menu-and-content__content___notes____create-new_____create-form______response-create-note {
+    color: rgb(0, 255, 0);
+    font-size: 20px;
+}
+
+.user-team_team-menu-and-content__content___notes____create-new_____create-form______response-create-note_______validate {
+    color: rgb(255, 0, 0);
+}
+
+.user-team_team-menu-and-content__content___notes____content {
+    width: 100%;
+    height: 496px;
+    overflow: auto;
+    margin: 0 4px 0 0;
+    user-select: none;
+}
+
+/*=====================================================================================================================================*/
+
+.user-team_team-menu-and-content__content___notes____content_____non-out-date {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____non-out-date p {
+    font-weight: bold;
+    color: blueviolet;
+    border-bottom: 2px solid gray;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____non-out-date p:hover {
+    color: #000;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____non-out-date i {
+    font-weight: bold;
+    width: 32px;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____non-out-date______content {
+    max-height: 348px;
+    overflow: auto;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____non-out-date______content p {
+    font-weight: bold;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____non-out-date______content_______non-out-date-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: 1px solid black;
+    border-radius: 4px;
+    width: 98%;
+    height: 80px;
+    margin: 0 0 4px 8px;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____non-out-date______content_______non-out-date-item_______content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 92%;
+    height: 80px;
+    margin: 0 0 4px 8px;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____non-out-date______content_______non-out-date-item_______create-and-end-date {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____non-out-date______content_______non-out-date-item_______with-excercise {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    /* border: groove; */
+    width: 100%;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____non-out-date______content_______non-out-date-item_______create-and-end-date div {
+    margin: 0 120px 0 0;
+    /* border: groove; */
+}
+
+.user-team_team-menu-and-content__content___notes____content_____non-out-date______content_______non-out-date-item_______change-content-and-delete {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 4px 0 0 8px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____non-out-date______content_______non-out-date-item_______change-content-and-delete div:first-child {
+    font-weight: bold;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____non-out-date______content_______non-out-date-item_______change-content-and-delete div:first-child:hover {
+    color: blue
+}
+
+.user-team_team-menu-and-content__content___notes____content_____non-out-date______content_______non-out-date-item_______change-content-and-delete div:last-child {
+    font-weight: bold;
+    margin: 12px 0 0 0;
+    color: crimson;
+    border-bottom: 2px solid black;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____non-out-date______content_______non-out-date-item_______excercise-with-infor {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: bold;
+    margin: 0 0 0 16px;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____non-out-date______content_______non-out-date-item_______excercise-with-infor img {
+    width: 28px;
+    height: 28px;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____non-out-date______content_______non-out-date-item_______excercise-with-infor div:nth-child(2) {
+    /* border: groove; */
+    word-wrap: "break-word";
+    word-break: "break-word";
+    width: 360px;
+    height: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0 54px 0 4px;
+    text-align: left;
+}
+
+/*=====================================================================================================================================*/
+
+/*=====================================================================================================================================*/
+
+.user-team_team-menu-and-content__content___notes____content_____out-date {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____out-date p {
+    font-weight: bold;
+    color: blueviolet;
+    border-bottom: 2px solid gray;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____out-date p:hover {
+    color: #000;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____out-date i {
+    font-weight: bold;
+    width: 32px;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____out-date______content {
+    max-height: 348px;
+    overflow: auto;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____out-date______content p {
+    font-weight: bold;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____out-date______content_______out-date-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: 1px solid black;
+    border-radius: 4px;
+    width: 98%;
+    height: 80px;
+    margin: 0 0 4px 8px;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____out-date______content_______out-date-item_______content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 92%;
+    height: 80px;
+    margin: 0 0 4px 8px;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____out-date______content_______out-date-item_______create-and-end-date {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____out-date______content_______out-date-item_______with-excercise {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    /* border: groove; */
+    width: 100%;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____out-date______content_______out-date-item_______create-and-end-date div {
+    margin: 0 120px 0 0;
+    /* border: groove; */
+}
+
+.user-team_team-menu-and-content__content___notes____content_____out-date______content_______out-date-item_______change-content-and-delete {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 4px 0 0 8px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____out-date______content_______out-date-item_______change-content-and-delete div:first-child {
+    font-weight: bold;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____out-date______content_______out-date-item_______change-content-and-delete div:first-child:hover {
+    color: blue
+}
+
+.user-team_team-menu-and-content__content___notes____content_____out-date______content_______out-date-item_______change-content-and-delete div:last-child {
+    font-weight: bold;
+    margin: 12px 0 0 0;
+    color: crimson;
+    border-bottom: 2px solid black;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____out-date______content_______out-date-item_______excercise-with-infor {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: bold;
+    margin: 0 0 0 16px;
+    color: red;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____out-date______content_______out-date-item_______excercise-with-infor img {
+    width: 28px;
+    height: 28px;
+}
+
+.user-team_team-menu-and-content__content___notes____content_____out-date______content_______out-date-item_______excercise-with-infor div:nth-child(2) {
+    /* border: groove; */
+    word-wrap: "break-word";
+    word-break: "break-word";
+    width: 360px;
+    height: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0 54px 0 4px;
+    text-align: left;
+}

@@ -1,0 +1,109 @@
+.user-dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-width: 1024px;
+    width: 99.5%;
+}
+
+.user-dashboard_header {
+    height: 52px;
+    width: 100%;
+    background-color: rgb(173, 228, 159);
+    border-style: groove;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    user-select: none;
+}
+
+.user-dashboard_header__logo {
+    margin: 8px 0 0 28px;
+}
+
+.user-dashboard_header__logo img {
+    height: 56px;
+    width: 180px;
+}
+
+.user-dashboard_header__search {
+    margin: 0 0 0 28px;
+}
+
+.user-dashboard_header__search input {
+    height: 32px;
+    width: 480px;
+    border-radius: 4px;
+    font-size: 16px;
+    border-style: groove;
+}
+
+.user-dashboard_header__infor {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.user-dashboard_header__infor___avatar img {
+    height: 40px;
+    width: 40px;
+}
+
+.user-dashboard_header__infor___fullname button {
+    height: 36px;
+    margin: 0 60px 0 0;
+    font-weight: bold;
+    border-style: groove;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.user-dashboard_container {
+    height: 560px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border-style: groove;
+    flex-grow: 0;
+}
+
+.user-dashboard_container__menu {
+    width: 60px;
+    height: 100%;
+    background-color: rgb(230, 224, 225);
+    border-style: groove;
+}
+
+.user-dashboard_container__menu___icon {
+    margin: 28px 0 28px 0;
+    user-select: none;
+}
+
+.user-dashboard_container__content {
+    height: 100%;
+    width: 40%;
+    background-color: rgb(255, 255, 255);
+    border-style: groove;
+    flex: 1;
+}
+
+.user-dashboard_footer {
+    width: 100%;
+    border-style: groove;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: rgb(27, 27, 27);
+    color: white;
+    user-select: none;
+}
+
+.user-dashboard_footer a {
+    text-decoration: none;
+    color: rgb(113, 240, 120);
+}
