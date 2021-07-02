@@ -6,6 +6,9 @@ import axios from "axios";
 export default class ExcercisesOwnedListContent extends React.Component {
   constructor(props) {
     super(props);
+    this.semounted = false;
+    this.mounted = false;
+    this.axiosmounted = false;
     this.state = {
       CurrentExcerciseChoiceOwnedList: [],
       NumberExcerciseOnPage: "3",
@@ -16,7 +19,8 @@ export default class ExcercisesOwnedListContent extends React.Component {
       AllNumberOfIndexExcerciseOnPageList: [],
       checkValidatePrevLeft: true,
       checkValidateNextRight: false,
-      overIndexExcerciseIsOpen: false
+      overIndexExcerciseIsOpen: false,
+      checkLoadingExcerciseOwnedList: false
     };
   }
 
@@ -33,6 +37,8 @@ export default class ExcercisesOwnedListContent extends React.Component {
   };
 
   componentDidMount = () => {
+    this.axiosmounted = true;
+
     axios
       .post("./getexcerciseownedlist", {
         MemberID: this.props.MemberID,
@@ -41,35 +47,46 @@ export default class ExcercisesOwnedListContent extends React.Component {
         NumberIndexExcerciseOnPage: this.state.NumberIndexExcerciseOnPage
       })
       .then(res => {
-        let allNumberOfIndexExcerciseOnPageList = [];
-        let excerciselistlength = res.data.AllNumberExcercise;
+        if (this.axiosmounted) {
+          let allNumberOfIndexExcerciseOnPageList = [];
+          let excerciselistlength = res.data.AllNumberExcercise;
 
-        let allNumberOfExcercise = Math.ceil(
-          excerciselistlength / Number(this.state.NumberExcerciseOnPage)
-        );
+          let allNumberOfExcercise = Math.ceil(
+            excerciselistlength / Number(this.state.NumberExcerciseOnPage)
+          );
 
-        for (let i = 1; i <= allNumberOfExcercise; i++) {
-          allNumberOfIndexExcerciseOnPageList.push(i + "");
+          for (let i = 1; i <= allNumberOfExcercise; i++) {
+            allNumberOfIndexExcerciseOnPageList.push(i + "");
+          }
+          this.setState({
+            AllNumberOfIndexExcerciseOnPageList: allNumberOfIndexExcerciseOnPageList,
+            AllNumberExcercise: res.data.AllNumberExcercise,
+            CurrentExcerciseChoiceOwnedList:
+              res.data.CurrentExcerciseChoiceOwnedList
+          });
         }
-        this.setState({
-          AllNumberOfIndexExcerciseOnPageList: allNumberOfIndexExcerciseOnPageList,
-          AllNumberExcercise: res.data.AllNumberExcercise,
-          CurrentExcerciseChoiceOwnedList:
-            res.data.CurrentExcerciseChoiceOwnedList
-        });
       })
       .catch(error => console.log(error));
 
+    this.timeout = setTimeout(() => {
+      this.setState({
+        checkLoadingExcerciseOwnedList: true
+      });
+    }, 1000);
+
+    this.semounted = true;
     this.mounted = true;
 
     this.props.socket.on("send-to-update-excercise-owned-list", data => {
-      if (data.MemberID === this.props.MemberID) {
-        this.props.socket.emit("receive-to-update-excercise-owned-list", {
-          MemberID: this.props.MemberID,
-          CurrentIndexExcercisePage: this.state.CurrentIndexExcercisePage,
-          NumberExcerciseOnPage: this.state.NumberExcerciseOnPage,
-          NumberIndexExcerciseOnPage: this.state.NumberIndexExcerciseOnPage
-        });
+      if (this.semounted) {
+        if (data.MemberID === this.props.MemberID) {
+          this.props.socket.emit("receive-to-update-excercise-owned-list", {
+            MemberID: this.props.MemberID,
+            CurrentIndexExcercisePage: this.state.CurrentIndexExcercisePage,
+            NumberExcerciseOnPage: this.state.NumberExcerciseOnPage,
+            NumberIndexExcerciseOnPage: this.state.NumberIndexExcerciseOnPage
+          });
+        }
       }
     });
 
@@ -98,7 +115,12 @@ export default class ExcercisesOwnedListContent extends React.Component {
   };
 
   componentWillUnmount = () => {
+    this.semounted = false;
     this.mounted = false;
+    this.axiosmounted = false;
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
   };
 
   chooseIndexExcercisePage = event => {
@@ -129,7 +151,7 @@ export default class ExcercisesOwnedListContent extends React.Component {
 
     setTimeout(() => {
       this.props.updateRenderExcerciseOwnedControl("owneditem");
-    }, 200);
+    }, 800);
   };
 
   renderIndexOfExcerciseItemList = () => {
@@ -353,7 +375,16 @@ export default class ExcercisesOwnedListContent extends React.Component {
         <div className="user-excercises_all__public-list___title">
           <p>Bộ đề - Bài tập Sở hữu</p>
         </div>
-        {this.renderExcerciseOwnedListContent()}
+        {this.state.checkLoadingExcerciseOwnedList ? (
+          <div style={{ width: "100%", height: "100%" }}>
+            {this.renderExcerciseOwnedListContent()}
+          </div>
+        ) : (
+          <p style={{ color: "blue", fontWeight: "bold", textAlign: "center" }}>
+            Đang tải dữ liệu các Bộ đề-Bài tập sở hữu....
+          </p>
+        )}
+
         <Modal
           style={{
             content: {
@@ -374,7 +405,7 @@ export default class ExcercisesOwnedListContent extends React.Component {
           <div>
             <p style={{ fontWeight: "bold", color: "red" }}>NHẮC NHỞ</p>
             <p style={{ fontWeight: "bold" }}>
-              Không thể vượt quá số lượng Bộ đề - Bài tập công khai!!!!
+              Không thể vượt quá số lượng Bộ đề - Bài tập sở hữu!!!!
             </p>
           </div>
           <button

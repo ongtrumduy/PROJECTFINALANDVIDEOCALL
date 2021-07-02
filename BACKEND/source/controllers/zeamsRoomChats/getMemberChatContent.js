@@ -1,7 +1,7 @@
 import zeamsRoomChatsContents from "../../services/zeamsRoomChats/zeamsRoomChatsContents";
 
 let GetMemberChatContent = async (req, res) => {
-  //   console.log(req.body);
+    console.log(req.body);
   let resGetMemberChatContent = await zeamsRoomChatsContents.responseMemberChatContent(
     req.body
   );

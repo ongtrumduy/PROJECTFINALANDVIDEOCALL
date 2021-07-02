@@ -159,6 +159,8 @@ class ZeamsAssignments {
           assignmentEndTimeInfor
         );
 
+        console.log("RA cái checkOverTime", checkOverTime);
+
         if (checkOverTime) {
           assignmentitem.CheckOverTimeToFinished = checkOverTime;
         }

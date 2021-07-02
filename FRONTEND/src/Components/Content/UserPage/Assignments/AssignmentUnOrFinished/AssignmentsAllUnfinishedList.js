@@ -6,6 +6,9 @@ import AssignmentsUnfinishedItem from "./AssignmentsUnfinishedItem";
 export default class AssignmentsAllUnfinishedList extends React.Component {
   constructor(props) {
     super(props);
+    this.semounted = false;
+    this.mounted = false;
+
     this.state = {
       ReminderChoiceID: "",
       AllAssignmentUnfinishedList: []

@@ -6,6 +6,9 @@ import axios from "axios";
 export default class ExcercisesPublicListContent extends React.Component {
   constructor(props) {
     super(props);
+    this.axiosmounted = false;
+    this.semounted = false;
+    this.mounted = false;
     this.state = {
       CurrentExcerciseChoicePublicList: [],
       NumberExcerciseOnPage: "3",
@@ -16,7 +19,8 @@ export default class ExcercisesPublicListContent extends React.Component {
       AllNumberOfIndexExcerciseOnPageList: [],
       checkValidatePrevLeft: true,
       checkValidateNextRight: false,
-      overIndexExcerciseIsOpen: false
+      overIndexExcerciseIsOpen: false,
+      checkLoadingExcercisePublicList: false
     };
   }
 
@@ -33,6 +37,8 @@ export default class ExcercisesPublicListContent extends React.Component {
   };
 
   componentDidMount = () => {
+    this.axiosmounted = true;
+
     axios
       .post("./getexcercisepubliclist", {
         MemberID: this.props.MemberID,
@@ -41,35 +47,46 @@ export default class ExcercisesPublicListContent extends React.Component {
         NumberIndexExcerciseOnPage: this.state.NumberIndexExcerciseOnPage
       })
       .then(res => {
-        let allNumberOfIndexExcerciseOnPageList = [];
-        let excerciselistlength = res.data.AllNumberExcercise;
+        if (this.axiosmounted) {
+          let allNumberOfIndexExcerciseOnPageList = [];
+          let excerciselistlength = res.data.AllNumberExcercise;
 
-        let allNumberOfExcercise = Math.ceil(
-          excerciselistlength / Number(this.state.NumberExcerciseOnPage)
-        );
+          let allNumberOfExcercise = Math.ceil(
+            excerciselistlength / Number(this.state.NumberExcerciseOnPage)
+          );
 
-        for (let i = 1; i <= allNumberOfExcercise; i++) {
-          allNumberOfIndexExcerciseOnPageList.push(i + "");
+          for (let i = 1; i <= allNumberOfExcercise; i++) {
+            allNumberOfIndexExcerciseOnPageList.push(i + "");
+          }
+          this.setState({
+            AllNumberOfIndexExcerciseOnPageList: allNumberOfIndexExcerciseOnPageList,
+            AllNumberExcercise: res.data.AllNumberExcercise,
+            CurrentExcerciseChoicePublicList:
+              res.data.CurrentExcerciseChoicePublicList
+          });
         }
-        this.setState({
-          AllNumberOfIndexExcerciseOnPageList: allNumberOfIndexExcerciseOnPageList,
-          AllNumberExcercise: res.data.AllNumberExcercise,
-          CurrentExcerciseChoicePublicList:
-            res.data.CurrentExcerciseChoicePublicList
-        });
       })
       .catch(error => console.log(error));
 
+    this.timeout = setTimeout(() => {
+      this.setState({
+        checkLoadingExcercisePublicList: true
+      });
+    }, 1000);
+
+    this.semounted = true;
     this.mounted = true;
 
     this.props.socket.on("send-to-update-excercise-public-list", data => {
-      if (data.MemberID === this.props.MemberID) {
-        this.props.socket.emit("receive-to-update-excercise-public-list", {
-          MemberID: this.props.MemberID,
-          CurrentIndexExcercisePage: this.state.CurrentIndexExcercisePage,
-          NumberExcerciseOnPage: this.state.NumberExcerciseOnPage,
-          NumberIndexExcerciseOnPage: this.state.NumberIndexExcerciseOnPage
-        });
+      if (this.semounted) {
+        if (data.MemberID === this.props.MemberID) {
+          this.props.socket.emit("receive-to-update-excercise-public-list", {
+            MemberID: this.props.MemberID,
+            CurrentIndexExcercisePage: this.state.CurrentIndexExcercisePage,
+            NumberExcerciseOnPage: this.state.NumberExcerciseOnPage,
+            NumberIndexExcerciseOnPage: this.state.NumberIndexExcerciseOnPage
+          });
+        }
       }
     });
 
@@ -99,6 +116,11 @@ export default class ExcercisesPublicListContent extends React.Component {
 
   componentWillUnmount = () => {
     this.mounted = false;
+    this.semounted = false;
+    this.axiosmounted = false;
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
   };
 
   chooseIndexExcercisePage = event => {
@@ -355,7 +377,15 @@ export default class ExcercisesPublicListContent extends React.Component {
         <div className="user-excercises_all__public-list___title">
           <p>Bộ đề - Bài tập Công khai</p>
         </div>
-        {this.renderExcercisePublicListContent()}
+        {this.state.checkLoadingExcercisePublicList ? (
+          <div style={{ width: "100%", height: "100%" }}>
+            {this.renderExcercisePublicListContent()}
+          </div>
+        ) : (
+          <p style={{ color: "blue", fontWeight: "bold", textAlign: "center" }}>
+            Đang tải dữ liệu các Bộ đề-Bài tập công khai....
+          </p>
+        )}
         <Modal
           style={{
             content: {

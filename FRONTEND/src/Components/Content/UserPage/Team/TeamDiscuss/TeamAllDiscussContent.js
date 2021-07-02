@@ -6,16 +6,22 @@ import TeamDiscussContentItem from "./TeamDiscussContentItem";
 export default class TeamAllDiscussContent extends React.Component {
   constructor(props) {
     super(props);
+    this.axiosmounted = false;
+    this.mounted = false;
+    this.semounted = false;
     this.state = {
       CurrentTeamDiscussContent: [],
       CurrentIndexToRenderDiscussContent: "1",
-      NumberRenderDiscussContent: "5",
+      NumberRenderDiscussContent: "3",
       CheckNextRenderDiscussContent: false,
-      TeamChoiceDiscussID: ""
+      TeamChoiceDiscussID: "",
+      checkLoadingTeamDiscussContent: false
     };
   }
 
   componentDidMount = () => {
+    this.axiosmounted = true;
+
     axios
       .post("/getteamlist/getteamdiscuss", {
         TeamID: this.props.TeamID,
@@ -24,14 +30,23 @@ export default class TeamAllDiscussContent extends React.Component {
         NumberRenderDiscussContent: this.state.NumberRenderDiscussContent
       })
       .then(res => {
-        this.setState({
-          CurrentTeamDiscussContent: res.data.CurrentTeamDiscussContent,
-          CheckNextRenderDiscussContent: res.data.CheckNextRenderDiscussContent
-        });
+        if (this.axiosmounted) {
+          this.setState({
+            CurrentTeamDiscussContent: res.data.CurrentTeamDiscussContent,
+            CheckNextRenderDiscussContent:
+              res.data.CheckNextRenderDiscussContent
+          });
+        }
       })
       .catch(error => {
         console.log(error);
       });
+
+    this.timeout = setTimeout(() => {
+      this.setState({
+        checkLoadingTeamDiscussContent: true
+      });
+    }, 500);
 
     this.mounted = true;
     this.semounted = true;
@@ -67,6 +82,10 @@ export default class TeamAllDiscussContent extends React.Component {
   componentWillUnmount = () => {
     this.mounted = false;
     this.semounted = false;
+    this.axiosmounted = false;
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
   };
 
   // componentDidUpdate = () => {
@@ -149,26 +168,38 @@ export default class TeamAllDiscussContent extends React.Component {
 
   render() {
     return (
-      <div className="user-team_team-menu-and-content__content___discuss_____alldiscuss">
-        <div
-          style={
-            this.state.CheckNextRenderDiscussContent
-              ? { display: "block" }
-              : { display: "none" }
-          }
-          onClick={() => this.sendToSeeOldDiscussContent()}
-          className="user-team_team-menu-and-content__content___discuss_____alldiscuss____seen-old-discuss"
-        >
-          <p>Xem thêm các Thảo luận cũ !!!</p>
-        </div>
-        <div
-          // id="first-message"
-          className="user-team_team-menu-and-content__content___discuss_____alldiscuss_____content"
-        >
-          {this.state.CurrentTeamDiscussContent.map((teamitem, teamindex) => (
-            <div key={teamindex}>{this.renderTeamDiscussContent(teamitem)}</div>
-          ))}
-        </div>
+      <div style={{ width: "100%", height: "456px" }}>
+        {this.state.checkLoadingTeamDiscussContent ? (
+          <div className="user-team_team-menu-and-content__content___discuss_____alldiscuss">
+            <div
+              style={
+                this.state.CheckNextRenderDiscussContent
+                  ? { display: "block" }
+                  : { display: "none" }
+              }
+              onClick={() => this.sendToSeeOldDiscussContent()}
+              className="user-team_team-menu-and-content__content___discuss_____alldiscuss____seen-old-discuss"
+            >
+              <p>Xem thêm các Thảo luận cũ !!!</p>
+            </div>
+            <div
+              // id="first-message"
+              className="user-team_team-menu-and-content__content___discuss_____alldiscuss_____content"
+            >
+              {this.state.CurrentTeamDiscussContent.map(
+                (teamitem, teamindex) => (
+                  <div key={teamindex}>
+                    {this.renderTeamDiscussContent(teamitem)}
+                  </div>
+                )
+              )}
+            </div>
+          </div>
+        ) : (
+          <p style={{ color: "blue", fontWeight: "bold" }}>
+            Đang tải dữ liệu thảo luận nhóm....
+          </p>
+        )}
       </div>
     );
   }

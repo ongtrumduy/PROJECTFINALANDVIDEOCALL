@@ -1,12 +1,28 @@
 import React from "react";
+import Modal from "react-modal";
 
 // import { Link } from "react-router-dom";
 
 export default class TeamMainMenu extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { setSelectTeam: "discuss" };
+    this.state = {
+      setSelectTeam: "discuss",
+      checkAlreadyCallTeamVideoIsOpen: false
+    };
   }
+
+  openCheckAlreadyCallTeamVideoModal = () => {
+    this.setState({
+      checkAlreadyCallTeamVideoIsOpen: true
+    });
+  };
+
+  closeCheckAlreadyCallTeamVideoModal = () => {
+    this.setState({
+      checkAlreadyCallTeamVideoIsOpen: false
+    });
+  };
 
   setSelectTeamClickChoose = setSelect => {
     this.props.setSelectTeamContentClickChoose(setSelect);
@@ -16,26 +32,41 @@ export default class TeamMainMenu extends React.Component {
   };
 
   startBeginCallVideoTeam = () => {
-    // this.props.socket.emit("start-begin-call-video", {
-    //   TeamID: this.props.TeamID,
-    //   MemberID: this.props.MemberID,
-    //   MemberSocketID: this.props.socket.id
-    // });
-    // this.props.socket.on("joined-team-call", data => {
-    //   alert(data.Alert);
-    // });
-    // this.props.socket.on("non-joined-team-call", data => {
-    // this.props.updateRenderTeamControl("videocall");
-    // });
-
-    window.open(
-      `https://localhost:3000/videoteamcall/MemberID=${this.props.MemberID}&&TeamID=${this.props.TeamID}`,
-      "_blank",
-      "toolbar=0,location=0,menubar=0"
-    );
+    this.props.socket.emit("send-to-check-begin-call-team-video", {
+      MemberID: this.props.MemberID
+    });
   };
 
-  componentDidMount = () => {};
+  componentDidMount = () => {
+    this.mouted = true;
+
+    this.props.socket.on("receive-to-check-begin-call-team-video", data => {
+      if (this.mouted) {
+        if (
+          data.MemberID === this.props.MemberID &&
+          data.SocketID === this.props.socket.id
+        ) {
+          // console.log(
+          //   "Ra cái CheckAlreadyCallTeamVideo",
+          //   data.CheckAlreadyCallTeamVideo
+          // );
+          if (data.CheckAlreadyCallTeamVideo) {
+            this.openCheckAlreadyCallTeamVideoModal();
+          } else {
+            window.open(
+              `/videoteamcall/MemberID=${this.props.MemberID}&&TeamID=${this.props.TeamID}`,
+              "_blank",
+              "toolbar=0,location=0,menubar=0"
+            );
+          }
+        }
+      }
+    });
+  };
+
+  componentWillUnmount = () => {
+    this.mouted = false;
+  };
 
   render() {
     return (
@@ -136,6 +167,41 @@ export default class TeamMainMenu extends React.Component {
             </button>
           </div>
         </div>
+
+        {/*============================================================================================================================= */}
+
+        <Modal
+          style={{
+            content: {
+              top: "50%",
+              left: "50%",
+              right: "auto",
+              bottom: "auto",
+              marginRight: "-50%",
+              transform: "translate(-50%, -50%)",
+              backgroundColor: "#ecf0f1",
+              userSelect: "none",
+              zIndex: "3"
+            }
+          }}
+          ariaHideApp={false}
+          isOpen={this.state.checkAlreadyCallTeamVideoIsOpen}
+          onRequestClose={this.closeCheckAlreadyCallTeamVideoModal}
+        >
+          <div>
+            <p style={{ fontWeight: "bold", color: "red" }}>THÔNG BÁO</p>
+            <p style={{ fontWeight: "bold" }}>
+              Bạn không thể thực hiện Cuộc gọi nhóm vì bạn Đang tham gia cuộc
+              gọi của nhóm {this.state.TeamCallVideoName} rồi!!!!
+            </p>
+          </div>
+          <button
+            style={{ float: "right", cursor: "pointer" }}
+            onClick={() => this.closeCheckAlreadyCallTeamVideoModal()}
+          >
+            Đã hiểu!!!
+          </button>
+        </Modal>
       </div>
     );
   }

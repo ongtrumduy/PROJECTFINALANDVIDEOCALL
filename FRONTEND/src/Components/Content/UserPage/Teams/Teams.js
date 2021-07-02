@@ -6,7 +6,7 @@ import TeamsAddCodeTeam from "./TeamsAAndCTeam/TeamsAddCodeTeam";
 import TeamsAllContent from "./TeamsAllContent/TeamsAllContent";
 import TeamsCreateTeam from "./TeamsAAndCTeam/TeamsCreateTeam";
 import Team from "../Team/Team";
-import VideoCall from "../VideoTeamCall/VideoTeamCall";
+// import VideoCall from "../VideoTeamCall/VideoTeamCall";
 
 export default class Teams extends React.Component {
   constructor(props) {
@@ -72,6 +72,7 @@ export default class Teams extends React.Component {
             openConfirmKickoutFromTeamModal={
               this.openConfirmKickoutFromTeamModal
             }
+            localhostclientIP={this.props.localhostclientIP}
           />
         );
       case "teamall":
@@ -83,15 +84,15 @@ export default class Teams extends React.Component {
             getTeamIDMemberChoice={this.getTeamIDMemberChoice}
           />
         );
-      case "videocall":
-        return (
-          <VideoCall
-            MemberID={this.props.MemberID}
-            TeamID={this.state.TeamID}
-            socket={this.props.socket}
-            updateRenderTeamControl={this.updateRenderTeamControl}
-          />
-        );
+      // case "videocall":
+      //   return (
+      //     <VideoCall
+      //       MemberID={this.props.MemberID}
+      //       TeamID={this.state.TeamID}
+      //       socket={this.props.socket}
+      //       updateRenderTeamControl={this.updateRenderTeamControl}
+      //     />
+      //   );
       default:
         return (
           <TeamsAllContent

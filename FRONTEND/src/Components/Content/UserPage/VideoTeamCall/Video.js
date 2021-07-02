@@ -16,9 +16,6 @@ export default class Video extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    // this.video.srcObject = nextProps.videoStream;
-    // console.log(nextProps.videoStream);
-
     if (
       nextProps.videoStream &&
       nextProps.videoStream !== this.props.videoStream
@@ -56,7 +53,8 @@ export default class Video extends React.Component {
             cursor: "pointer",
             padding: 5,
             fontSize: 20,
-            color: (this.state.mic && "white") || "red"
+            color: (this.state.mic && "white") || "red",
+            userSelect: "none"
           }}
           className="material-icons"
         >
@@ -68,7 +66,8 @@ export default class Video extends React.Component {
             cursor: "pointer",
             padding: 5,
             fontSize: 20,
-            color: (this.state.camera && "white") || "red"
+            color: (this.state.camera && "white") || "red",
+            userSelect: "none"
           }}
           className="material-icons"
         >

@@ -49,42 +49,47 @@ export default class TeamNotesNonOutDateContent extends React.Component {
           {this.state.TeamNoteNonOutDateContentList.map(
             (teamnoteitem, teamnoteindex) => (
               <div key={teamnoteindex}>
-                {teamnoteitem.TeamNoteTypeContent.map(teamnotetypeitem =>
-                  teamnotetypeitem.TeamNoteType === "with-excercise" ? (
-                    <TeamNotesNonOutDateContentItem
-                      TeamNoteID={teamnoteitem.TeamNoteID}
-                      TeamNoteType={teamnotetypeitem.TeamNoteType}
-                      TeamNoteName={teamnoteitem.TeamNoteName}
-                      TeamNoteDescription={teamnoteitem.TeamNoteDescription}
-                      TeamNoteEndDate={teamnoteitem.TeamNoteEndDate}
-                      TeamNoteCreateDate={teamnoteitem.TeamNoteCreateDate}
-                      ExcerciseTeamNoteID={teamnotetypeitem.ExcerciseTeamNoteID}
-                      setChooseTeamNoteToChangeIcon={
-                        this.setChooseTeamNoteToChangeIcon
-                      }
-                      MemberID={this.props.MemberID}
-                      TeamID={this.props.TeamID}
-                      socket={this.props.socket}
-                      CheckMemberIsAdmin={this.props.CheckMemberIsAdmin}
-                    />
-                  ) : (
-                    <TeamNotesNonOutDateContentItem
-                      TeamNoteID={teamnoteitem.TeamNoteID}
-                      TeamNoteChoiceID={this.state.TeamNoteChoiceID}
-                      TeamNoteType={teamnotetypeitem.TeamNoteType}
-                      TeamNoteName={teamnoteitem.TeamNoteName}
-                      TeamNoteDescription={teamnoteitem.TeamNoteDescription}
-                      TeamNoteEndDate={teamnoteitem.TeamNoteEndDate}
-                      TeamNoteCreateDate={teamnoteitem.TeamNoteCreateDate}
-                      setChooseTeamNoteToChangeIcon={
-                        this.setChooseTeamNoteToChangeIcon
-                      }
-                      MemberID={this.props.MemberID}
-                      TeamID={this.props.TeamID}
-                      socket={this.props.socket}
-                      CheckMemberIsAdmin={this.props.CheckMemberIsAdmin}
-                    />
-                  )
+                {teamnoteitem.TeamNoteTypeContent.map(
+                  (teamnotetypeitem, teamnotetypeindex) =>
+                    teamnotetypeitem.TeamNoteType === "with-excercise" ? (
+                      <TeamNotesNonOutDateContentItem
+                        key={teamnotetypeindex}
+                        TeamNoteID={teamnoteitem.TeamNoteID}
+                        TeamNoteType={teamnotetypeitem.TeamNoteType}
+                        TeamNoteName={teamnoteitem.TeamNoteName}
+                        TeamNoteDescription={teamnoteitem.TeamNoteDescription}
+                        TeamNoteEndDate={teamnoteitem.TeamNoteEndDate}
+                        TeamNoteCreateDate={teamnoteitem.TeamNoteCreateDate}
+                        ExcerciseTeamNoteID={
+                          teamnotetypeitem.ExcerciseTeamNoteID
+                        }
+                        setChooseTeamNoteToChangeIcon={
+                          this.setChooseTeamNoteToChangeIcon
+                        }
+                        MemberID={this.props.MemberID}
+                        TeamID={this.props.TeamID}
+                        socket={this.props.socket}
+                        CheckMemberIsAdmin={this.props.CheckMemberIsAdmin}
+                      />
+                    ) : (
+                      <TeamNotesNonOutDateContentItem
+                        key={teamnotetypeindex}
+                        TeamNoteID={teamnoteitem.TeamNoteID}
+                        TeamNoteChoiceID={this.state.TeamNoteChoiceID}
+                        TeamNoteType={teamnotetypeitem.TeamNoteType}
+                        TeamNoteName={teamnoteitem.TeamNoteName}
+                        TeamNoteDescription={teamnoteitem.TeamNoteDescription}
+                        TeamNoteEndDate={teamnoteitem.TeamNoteEndDate}
+                        TeamNoteCreateDate={teamnoteitem.TeamNoteCreateDate}
+                        setChooseTeamNoteToChangeIcon={
+                          this.setChooseTeamNoteToChangeIcon
+                        }
+                        MemberID={this.props.MemberID}
+                        TeamID={this.props.TeamID}
+                        socket={this.props.socket}
+                        CheckMemberIsAdmin={this.props.CheckMemberIsAdmin}
+                      />
+                    )
                 )}
               </div>
             )

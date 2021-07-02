@@ -37,7 +37,7 @@ export default class ExcercisesPrivateDetailItem extends React.Component {
         </div>
         <div className="user-excercises_all-list__private-list___private-item_____excercise-logo-and-content">
           <div className="user-excercises_all-list__private-list___private-item_____excercise-logo">
-            <img src={de110} />
+            <img src={de110} alt="excercise-logo" />
             <p>Mô tả: fkasjfakakakakakakakak</p>
           </div>
           <div className="user-excercises_all-list__private-list___private-item_____excercise-content">

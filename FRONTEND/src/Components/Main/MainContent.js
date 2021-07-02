@@ -19,6 +19,7 @@ export default class MainContent extends React.Component {
             updateRenderLogPage={this.updateRenderLogPage}
             MemberID={this.props.MemberID}
             socket={this.props.socket}
+            localhostclientIP={this.props.localhostclientIP}
           />
         );
       case "User":
@@ -27,6 +28,7 @@ export default class MainContent extends React.Component {
             updateRenderLogPage={this.updateRenderLogPage}
             MemberID={this.props.MemberID}
             socket={this.props.socket}
+            localhostclientIP={this.props.localhostclientIP}
           />
         );
       case "Log":
@@ -41,6 +43,7 @@ export default class MainContent extends React.Component {
         return (
           <LogPage
             updateRenderLogPage={this.updateRenderLogPage}
+            setMemberIDForMemberLogin={this.props.setMemberIDForMemberLogin}
             socket={this.props.socket}
           />
         );
@@ -54,7 +57,7 @@ export default class MainContent extends React.Component {
   };
 
   render() {
-    console.log("SAng cái memberID ", this.props.MemberID);
+    // console.log("SAng cái memberID ", this.props.MemberID);
     return <div>{this.updateRenderMain()}</div>;
   }
 }

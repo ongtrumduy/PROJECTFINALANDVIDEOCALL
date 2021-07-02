@@ -5,22 +5,35 @@ import TeamSettingsTeamMembersItem from "./TeamSettingsTeamMembersItem";
 export default class TeamSettingsTeamMembers extends React.Component {
   constructor(props) {
     super(props);
+    this.axiosmounted = false;
+    this.upmounted = false;
     this.state = {
-      AllMemberOfTeam: []
+      AllMemberOfTeam: [],
+      checkLoadingTeamMember: false
     };
   }
 
   componentDidMount = () => {
+    this.axiosmounted = true;
+
     axios
       .post("./getteamlist/getallmembersofteam", {
         TeamID: this.props.TeamID
       })
       .then(res => {
-        console.log(res.data);
-        this.setState({
-          AllMemberOfTeam: res.data.AllMemberOfTeam
-        });
+        if (this.axiosmounted) {
+          // console.log(res.data);
+          this.setState({
+            AllMemberOfTeam: res.data.AllMemberOfTeam
+          });
+        }
       });
+
+    this.timeout = setTimeout(() => {
+      this.setState({
+        checkLoadingTeamMember: true
+      });
+    }, 300);
 
     this.upmounted = true;
 
@@ -36,7 +49,11 @@ export default class TeamSettingsTeamMembers extends React.Component {
   };
 
   componentWillUnmount = () => {
+    this.axiosmounted = false;
     this.upmounted = false;
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
   };
 
   render() {
@@ -45,21 +62,27 @@ export default class TeamSettingsTeamMembers extends React.Component {
         <p style={{ color: "blue", fontSize: "16px", userSelect: "none" }}>
           Tất cả thành viên nhóm
         </p>
-        <div className="user-team_team-menu-and-content__content___settings____team-members____content">
-          {this.state.AllMemberOfTeam.map((memberitem, memberindex) => (
-            <div key={memberindex}>
-              <TeamSettingsTeamMembersItem
-                MemberID={this.props.MemberID}
-                TeamID={this.props.TeamID}
-                socket={this.props.socket}
-                CheckMemberIsAdmin={this.props.CheckMemberIsAdmin}
-                MemberChoiceID={memberitem.MemberID}
-                MemberChoiceFullName={memberitem.MemberFullName}
-                CheckChooseMemberIsAdmin={memberitem.CheckMemberIsAdmin}
-              />
-            </div>
-          ))}
-        </div>
+        {this.state.checkLoadingTeamMember ? (
+          <div className="user-team_team-menu-and-content__content___settings____team-members____content">
+            {this.state.AllMemberOfTeam.map((memberitem, memberindex) => (
+              <div key={memberindex}>
+                <TeamSettingsTeamMembersItem
+                  MemberID={this.props.MemberID}
+                  TeamID={this.props.TeamID}
+                  socket={this.props.socket}
+                  CheckMemberIsAdmin={this.props.CheckMemberIsAdmin}
+                  MemberChoiceID={memberitem.MemberID}
+                  MemberChoiceFullName={memberitem.MemberFullName}
+                  CheckChooseMemberIsAdmin={memberitem.CheckMemberIsAdmin}
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p style={{ color: "violet" }}>
+            Đang tải dữ liệu các thành viên nhóm....
+          </p>
+        )}
       </div>
     );
   }

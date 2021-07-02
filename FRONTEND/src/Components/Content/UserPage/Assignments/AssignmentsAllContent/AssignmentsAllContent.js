@@ -140,10 +140,13 @@ export default class AssignmentsAllContent extends React.Component {
       .then(res => {
         // console.log("về đây đi em ", res.data);
         if (res.data.checkResTurnIn === "turn-in-success") {
-          this.props.socket.on("receive-to-update-assignment-unfinished-list", {
-            MemberID: this.props.MemberID
-          });
-          this.props.socket.on("receive-to-update-assignment-finished-list", {
+          this.props.socket.emit(
+            "receive-to-update-assignment-unfinished-list",
+            {
+              MemberID: this.props.MemberID
+            }
+          );
+          this.props.socket.emit("receive-to-update-assignment-finished-list", {
             MemberID: this.props.MemberID
           });
           this.closeCheckHaveZeroScoreOfAssignmentModal();

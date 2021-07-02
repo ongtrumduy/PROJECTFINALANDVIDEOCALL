@@ -9,10 +9,52 @@ import ChatsFiles from "../ChatsFiles/ChatsFiles";
 export default class ChatsMainContent extends React.Component {
   constructor(props) {
     super(props);
+    // this.nextpropsmounted = false;
     this.state = {
-      setSelectChatContent: "message"
+      setSelectChatContent: "message",
+      checkLoadingChatMainContent: false
     };
   }
+
+  componentDidMount = () => {
+    this.timeout = setTimeout(() => {
+      this.setState({
+        checkLoadingChatMainContent: true
+      });
+    }, 600);
+  };
+
+  UNSAFE_componentWillReceiveProps = nextProps => {
+    // this.nextpropsmounted = true;
+
+    if (
+      nextProps.MemberChoiceChatID !== this.props.MemberChoiceChatID &&
+      nextProps.MemberChoiceChatID !== "" &&
+      this.props.MemberChoiceChatID !== ""
+    ) {
+      // if (this.nextpropsmounted) {
+      this.setState({
+        checkLoadingChatMainContent: false
+      });
+      // }
+
+      this.nexpropstimeout = setTimeout(() => {
+        this.setState({
+          checkLoadingChatMainContent: true
+        });
+      }, 600);
+    }
+  };
+
+  componentWillUnmount = () => {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
+    if (this.nexpropstimeout) {
+      clearTimeout(this.nexpropstimeout);
+    }
+    // this.nextpropsmounted = false;
+  };
 
   setSelectChatContentClickChoose = setSelect => {
     this.setState({
@@ -22,7 +64,23 @@ export default class ChatsMainContent extends React.Component {
 
   renderChatOrNonChatMainChooseContent = () => {
     if (this.props.CheckNonMemberToChat) {
-      return <div>{this.renderChatMainChooseContent()}</div>;
+      return (
+        <div>
+          {this.state.checkLoadingChatMainContent ? (
+            <div> {this.renderChatMainChooseContent()}</div>
+          ) : (
+            <p
+              style={{
+                color: "blue",
+                fontWeight: "bold",
+                textAlign: "center"
+              }}
+            >
+              Đang tải dữ liệu Cuộc trò chuyện....
+            </p>
+          )}
+        </div>
+      );
     } else {
       return (
         <div style={{ fontWeight: "bold" }}>

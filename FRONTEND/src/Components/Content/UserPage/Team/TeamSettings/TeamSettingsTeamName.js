@@ -4,6 +4,7 @@ import Modal from "react-modal";
 export default class TeamSettingTeamName extends React.Component {
   constructor(props) {
     super(props);
+    this.mounted = false;
     this.state = {
       TeamName: "",
       TeamDescription: "",
@@ -131,13 +132,21 @@ export default class TeamSettingTeamName extends React.Component {
   };
 
   componentDidMount = () => {
+    this.mounted = true;
+
     this.props.ChooseTeamInfor.map(teaminforitem => {
-      return this.setState({
-        TeamName: teaminforitem.TeamName,
-        TeamDescription: teaminforitem.TeamDescription,
-        TeamType: teaminforitem.TeamType
-      });
+      if (this.mounted) {
+        return this.setState({
+          TeamName: teaminforitem.TeamName,
+          TeamDescription: teaminforitem.TeamDescription,
+          TeamType: teaminforitem.TeamType
+        });
+      }
     });
+  };
+
+  componentWillUnmount = () => {
+    this.mounted = false;
   };
 
   render() {

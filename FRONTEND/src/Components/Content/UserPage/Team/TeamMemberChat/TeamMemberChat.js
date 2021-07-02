@@ -270,7 +270,10 @@ export default class TeamMemberChat extends React.Component {
   render() {
     return (
       <div>
-        <Draggable bounds={{ top: -300, left: 0, right: 600, bottom: 0 }}>
+        <Draggable
+          cancel=".user-team_team-menu-and-content__content___discuss____member-chat"
+          bounds={{ top: -300, left: 0, right: 600, bottom: 0 }}
+        >
           <div className="user-team_team-menu-and-content__content___discuss____member-chat">
             {this.renderTeamMemberChat()}
           </div>

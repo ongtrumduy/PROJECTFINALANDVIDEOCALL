@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Draggable from "react-draggable";
+// import Draggable from "react-draggable";
 
-import Videos from "./Components/Videos";
+import Videos from "./Videos";
 import Video from "./Video";
 
 export default class VideoTeamCallContent extends Component {
@@ -16,7 +16,7 @@ export default class VideoTeamCallContent extends Component {
       peerConnections: {},
       selectedVideo: null,
 
-      status: "Please wait...",
+      // status: "Please wait...",
 
       pc_config: {
         iceServers: [
@@ -87,26 +87,12 @@ export default class VideoTeamCallContent extends Component {
           OfferToReceiveAudio: true,
           OfferToReceiveVideo: true
         }
-      },
-
-      messages: [],
-      sendChannels: []
+      }
     };
   }
 
   componentDidMount = () => {
-    //  console.log("SAng bên này cái socketio ", this.props.socket);
-
     if (this.props.socket) {
-      //  console.log(
-      //    "SAng bên này cái socketioID ",
-      //    this.props.socket.id
-      //  );
-      //  console.log(
-      //    "SAng bên này cái MemberID ",
-      //    this.props.MemberID
-      //  );
-      //  console.log("SAng bên này cái TeamID ", this.props.TeamID);
       this.connectCallSuccess();
       this.peerMemberCallDisconnect();
       this.connectAllMemberCall();
@@ -117,6 +103,23 @@ export default class VideoTeamCallContent extends Component {
       this.removeErrorPeerConnection();
     }
   };
+
+  //==================================confirmEstablishConnectCallSucess======================================================
+
+  connectCallSuccess = () => {
+    this.props.socket.on("connection-call-success", data => {
+      console.log("Đã kết nối !!!!  ", data);
+
+      if (
+        data.MemberID === this.props.MemberID &&
+        data.TeamID === this.props.TeamID
+      ) {
+        this.getLocalStream();
+      }
+    });
+  };
+
+  //==================================getLocalStreamAndStartCameraAndMic======================================================
 
   getLocalStream = () => {
     const success = stream => {
@@ -144,19 +147,71 @@ export default class VideoTeamCallContent extends Component {
       }
     };
 
-    // navigator.mediaDevices
-    //   .getDisplayMedia(constraints)
-    //   .then(success)
-    //   .catch(failure);
-
     (async () => {
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
-      // const stream =  navigator.mediaDevices.getDisplayMedia(constraints);
-      // success(screenTrack);
-      // console.log("stream đó là: ", stream);
+
       success(stream);
     })().catch(failure);
   };
+
+  //==================================DisconnectedPeerMemberCall======================================================
+
+  peerMemberCallDisconnect = () => {
+    this.props.socket.on("peer-member-call-disconnected", data => {
+      this.state.peerConnections[data.RemoteMemberID].close();
+
+      const rVideo = this.state.remoteStreams.filter(
+        stream => stream.id === data.RemoteMemberID
+      );
+      rVideo && this.stopTracks(rVideo[0].stream);
+
+      const remoteStreams = this.state.remoteStreams.filter(
+        stream => stream.id !== data.RemoteMemberID
+      );
+
+      this.setState(prevState => {
+        const selectedVideo =
+          prevState.selectedVideo.id === data.RemoteMemberID &&
+          remoteStreams.length
+            ? { selectedVideo: remoteStreams[0] }
+            : null;
+
+        return {
+          remoteStreams,
+          ...selectedVideo
+        };
+      });
+    });
+  };
+
+  //==================================ConnectAllMemberCall======================================================
+
+  connectAllMemberCall = () => {
+    this.props.socket.on("connect-all-member-call", data => {
+      // console.log("Nhận kết nối từ thằng ", data.RemoteMemberID);
+      this.createPeerConnection(
+        data.RemoteMemberID,
+        data.RemoteMemberSocketID,
+        pc => {
+          if (pc) {
+            pc.createOffer(this.state.sdpConstraints).then(sdp => {
+              pc.setLocalDescription(sdp);
+
+              this.props.socket.emit("offer-to-connect-team-call", {
+                SDPOfferConnect: sdp,
+                LocalMemberID: this.props.MemberID,
+                LocalMemberSocketID: this.props.socket.id,
+                RemoteMemberID: data.RemoteMemberID,
+                RemoteMemberSocketID: data.RemoteMemberSocketID
+              });
+            });
+          }
+        }
+      );
+    });
+  };
+
+  //==================================createPeerConnectionForMember======================================================
 
   createPeerConnection = (RemoteMemberID, RemoteMemberSocketID, callback) => {
     try {
@@ -254,78 +309,7 @@ export default class VideoTeamCallContent extends Component {
     }
   };
 
-  switchVideo = _video => {
-    this.setState({
-      selectedVideo: _video
-    });
-  };
-
-  connectCallSuccess = () => {
-    this.props.socket.on("connection-call-success", data => {
-      if (
-        data.MemberID === this.props.MemberID &&
-        data.TeamID === this.props.TeamID
-      ) {
-        console.log("Đã kết nối !!!!  ", data);
-        this.getLocalStream();
-      }
-
-      // const status =
-      //   data.peerCount > 1
-      //     ? `Total Connected Peers: ${data.MemberPeerCount}`
-      //     : "Waiting for other peers to connect";
-
-      // this.setState({
-      //   status: status
-      // });
-    });
-  };
-
-  peerMemberCallDisconnect = () => {
-    this.props.socket.on("peer-member-call-disconnected", data => {
-      const remoteStreams = this.state.remoteStreams.filter(
-        stream => stream.id !== data.RemoteMemberID
-      );
-
-      this.setState(prevState => {
-        const selectedVideo =
-          prevState.selectedVideo.id === data.RemoteMemberID &&
-          remoteStreams.length
-            ? { selectedVideo: remoteStreams[0] }
-            : null;
-
-        return {
-          remoteStreams,
-          ...selectedVideo
-        };
-      });
-    });
-  };
-
-  connectAllMemberCall = () => {
-    this.props.socket.on("connect-all-member-call", data => {
-      // console.log("Nhận kết nối từ thằng ", data.RemoteMemberID);
-      this.createPeerConnection(
-        data.RemoteMemberID,
-        data.RemoteMemberSocketID,
-        pc => {
-          if (pc) {
-            pc.createOffer(this.state.sdpConstraints).then(sdp => {
-              pc.setLocalDescription(sdp);
-
-              this.props.socket.emit("offer-to-connect-team-call", {
-                SDPOfferConnect: sdp,
-                LocalMemberID: this.props.MemberID,
-                LocalMemberSocketID: this.props.socket.id,
-                RemoteMemberID: data.RemoteMemberID,
-                RemoteMemberSocketID: data.RemoteMemberSocketID
-              });
-            });
-          }
-        }
-      );
-    });
-  };
+  //==================================offerForConnectTeamCall======================================================
 
   offerForConnectTeamCall = () => {
     this.props.socket.on("offer-for-connect-team-call", data => {
@@ -360,6 +344,8 @@ export default class VideoTeamCallContent extends Component {
     });
   };
 
+  //==================================answerForConnectTeamCall======================================================
+
   answerForConnectTeamCall = () => {
     this.props.socket.on("answer-for-connect-team-call", data => {
       // console.log(
@@ -382,6 +368,8 @@ export default class VideoTeamCallContent extends Component {
       }
     });
   };
+
+  //==================================getCandidateForConnect======================================================
 
   getCandidateForConnect = () => {
     this.props.socket.on("get-candidate-for-connect", data => {
@@ -406,6 +394,8 @@ export default class VideoTeamCallContent extends Component {
       }
     });
   };
+
+  //==================================reconnectWhenHaveErrorConnect======================================================
 
   reconnectWhenHaveErrorConnect = () => {
     this.props.socket.on("reconnect-to-call-when-error", data => {
@@ -439,6 +429,8 @@ export default class VideoTeamCallContent extends Component {
     });
   };
 
+  //==================================removeErrorPeerConnection======================================================
+
   removeErrorPeerConnection = () => {
     this.props.socket.on("remove-error-peer-connection", data => {
       console.log("bắt vào đây rồi ");
@@ -458,52 +450,84 @@ export default class VideoTeamCallContent extends Component {
     });
   };
 
+  //==================================switchVideoRemoteOtherMemberCall======================================================
+
+  switchVideo = _video => {
+    this.setState({
+      selectedVideo: _video
+    });
+  };
+
+  //==================================stopTracks======================================================
+
+  stopTracks = stream => {
+    stream.getTracks().forEach(track => track.stop());
+  };
+
+  //==================================renderAllVideoCallOfMemberAndOthers======================================================
+
   render() {
-    console.log("xem peerConnections có gì: ", this.state.peerConnections);
+    // console.log("xem peerConnections có gì: ", this.state.peerConnections);
     if (this.state.disconnected) {
       this.props.socket.close();
-      this.state.localStream.getTracks().forEach(track => track.stop());
-      return <div>You have successfully Disconnected</div>;
+
+      this.stopTracks(this.state.localStream);
+
+      this.state.remoteStreams.forEach(rVideo =>
+        this.stopTracks(rVideo.stream)
+      );
+
+      this.state.peerConnections &&
+        Object.values(this.state.peerConnections).forEach(pc => pc.close());
+
+      return (
+        <div style={{ fontWeight: "bold" }}>
+          Bạn đã kết thúc cuộc gọi video call !!!!!
+        </div>
+      );
     }
-    const statusText = (
-      <div style={{ color: "yellow", padding: 5 }}>{this.state.status}</div>
-    );
+
+    // const statusText = (
+    //   <div style={{ color: "yellow", padding: 5 }}>{this.state.status}</div>
+    // );
 
     return (
       <div>
-        {/* <Daggable
-          style={{
-            zIndex: 101,
-            position: "absolute",
-            right: 0,
-            cursor: "move"
+        {/* <Draggable
+          bounds={{
+            top: -300,
+            left: 300,
+            right: 600,
+            bottom: 300
           }}
         > */}
+          <Video
+            videoStyle={{
+              // zIndex: 2,
+              // position: "absolute",
+              // right: 0,
+              width: 200,
+              cursor: "move"
+              // height: 200,
+              // margin: 5,
+              // backgroundColor: "black"
+            }}
+            frameStyle={{
+              width: 200,
+              margin: 5,
+              borderRadius: 5,
+              backgroundColor: "black"
+            }}
+            showMuteControls={true}
+            videoStream={this.state.localStream}
+            autoPlay
+            muted
+          />
+        {/* </Draggable> */}
+
         <Video
           videoStyle={{
-            // zIndex: 2,
-            // position: "absolute",
-            // right: 0,
-            width: 200
-            // height: 200,
-            // margin: 5,
-            // backgroundColor: "black"
-          }}
-          frameStyle={{
-            width: 200,
-            margin: 5,
-            borderRadius: 5,
-            backgroundColor: "black"
-          }}
-          showMuteControls={true}
-          videoStream={this.state.localStream}
-          autoPlay
-          muted
-        ></Video>
-        {/* </Daggable> */}
-        <Video
-          videoStyle={{
-            zIndex: 1,
+            // zIndex: 1,
             // position: "fixed",
             bottom: 0,
             minWidth: "100%",
@@ -516,7 +540,9 @@ export default class VideoTeamCallContent extends Component {
           }
           autoPlay
         ></Video>
+
         <br />
+
         <div
           style={{
             zIndex: 3,
@@ -527,7 +553,18 @@ export default class VideoTeamCallContent extends Component {
             // borderRadius: 5
           }}
         >
-          <div
+          {/* <div>
+            <i
+              onClick={() => {
+                this.setState({ disconnected: true });
+              }}
+              style={{ cursor: "pointer", paddingLeft: 15, color: "red" }}
+              className="material-icons"
+            >
+              {"call_end"}
+            </i>
+          </div> */}
+          {/* <div
             style={{
               margin: 10,
               backgroundColor: "#cdc4ff4f",
@@ -536,7 +573,7 @@ export default class VideoTeamCallContent extends Component {
             }}
           >
             {statusText}
-          </div>
+          </div> */}
         </div>
         <div>
           <Videos
@@ -545,25 +582,6 @@ export default class VideoTeamCallContent extends Component {
           ></Videos>
         </div>
         <br />
-
-        {/* <Chat
-          user={{
-            uid: (this.socket && this.socket.id) || ""
-          }}
-          messages={this.state.messages}
-          sendMessage={message => {
-            this.setState(prevState => {
-              return { messages: [...prevState.messages, message] };
-            });
-            this.state.sendChannels.map(sendChannel => {
-              sendChannel.readyState === "open" &&
-                sendChannel.send(JSON.stringify(message));
-            });
-            this.sendToPeer("new-message", JSON.stringify(message), {
-              local: this.socket.id
-            });
-          }}
-        /> */}
       </div>
     );
   }

@@ -119,7 +119,7 @@ class ZeamsExcercisesMemberResults {
   //-----------------------------------------------------------------------------------------------------------------
 
   createNewMemberDidAnswerContent(finishedanswerinfor) {
-    console.log("leuleuuuuuuuuu", finishedanswerinfor);
+    // console.log("leuleuuuuuuuuu", finishedanswerinfor);
     let checkCreateNewFinishedExcerciseAnswer = this.checkCreateNewFinishedExcerciseAnswerContent(
       finishedanswerinfor
     );
@@ -395,7 +395,7 @@ class ZeamsExcercisesMemberResults {
   //-----------------------------------------------------------------------------------------------------------------
 
   getMemberDidHighestScoreForAssignment(finishedanswerinfor) {
-    console.log("vào đây lấy điểm cao nhất ", finishedanswerinfor);
+    // console.log("vào đây lấy điểm cao nhất ", finishedanswerinfor);
     let excerciseDidIndex = this.ZeamsExcercisesMemberResults.findIndex(
       excercisediditem => {
         return excercisediditem.ExcerciseID === finishedanswerinfor.ExcerciseID;

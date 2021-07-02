@@ -4,7 +4,7 @@ let SetStartVideoCall = async io => {
   let membersocket = {};
   let membercallsocket = {};
   let allteamcall = {};
-  let count = 0;
+  // let count = 0;
 
   // let sleep = ms => {
   //   return new Promise(resolve => {
@@ -62,9 +62,11 @@ let SetStartVideoCall = async io => {
       // );
 
       // socket.emit("connection-call-success", "Có về đm");
-      io.sockets
-        .in(socket.id)
-        .emit("connection-call-success", "MemberJoinedCallCount");
+      io.sockets.in(socket.id).emit("connection-call-success", {
+        MemberID: data.MemberID,
+        SocketID: socket.id,
+        TeamID: data.TeamID
+      });
 
       // StartBeginSocket.emitAllSocketsOfMember(
       //   membercallsocket,
@@ -222,34 +224,34 @@ let SetStartVideoCall = async io => {
     //====================================================================================================
 
     //Do có thể đăng nhập cùng 1 nick nhiều chỗ phải check call đúng cái đang call
-    await socket.on("disconnected-call-team-logout", data => {
-      // console.log("data gửi đến để mà logout ra");
-      // console.log(data);
-      StartBeginSocket.emitAllOtherMemberJoinedCallOfTeam(
-        allteamcall,
-        membercallsocket,
-        data.TeamID,
-        data.MemberID,
-        io,
-        "peer-member-call-disconnected",
-        {
-          RemoteMemberID: data.MemberID,
-          RemoteMemberSocketID: data.MemberSocketID
-        }
-      );
+    // await socket.on("disconnected-call-team-logout", data => {
+    //   // console.log("data gửi đến để mà logout ra");
+    //   // console.log(data);
+    //   StartBeginSocket.emitAllOtherMemberJoinedCallOfTeam(
+    //     allteamcall,
+    //     membercallsocket,
+    //     data.TeamID,
+    //     data.MemberID,
+    //     io,
+    //     "peer-member-call-disconnected",
+    //     {
+    //       RemoteMemberID: data.MemberID,
+    //       RemoteMemberSocketID: data.MemberSocketID
+    //     }
+    //   );
 
-      membercallsocket = StartBeginSocket.setRemoveSocket(
-        membercallsocket,
-        data.MemberID,
-        data.MemberSocketID
-      );
+    //   membercallsocket = StartBeginSocket.setRemoveSocket(
+    //     membercallsocket,
+    //     data.MemberID,
+    //     data.MemberSocketID
+    //   );
 
-      allteamcall = StartBeginSocket.setRemoveSocket(
-        allteamcall,
-        data.TeamCallID,
-        data.MemberID
-      );
-    });
+    //   allteamcall = StartBeginSocket.setRemoveSocket(
+    //     allteamcall,
+    //     data.TeamCallID,
+    //     data.MemberID
+    //   );
+    // });
 
     //====================================================================================================
 
@@ -310,97 +312,121 @@ let SetStartVideoCall = async io => {
 
     //====================================================================================================
 
-    await socket.on("send-to-reconnect-again", data => {
-      console.log("Bị lỗi rồi: ", data.ErrorType);
-      let resLocalToRemoveErrorConnect = {
-        LocalMemberID: data.LocalMemberID,
-        LocalMemberSocketID: data.LocalMemberSocketID,
-        RemoteMemberID: data.RemoteMemberID,
-        RemoteMemberSocketID: data.RemoteMemberSocketID
-      };
-      let resRemoveToRemoveErrorConnect = {
-        LocalMemberID: data.RemoteMemberID,
-        LocalMemberSocketID: data.RemoteMemberSocketID,
-        RemoteMemberID: data.LocalMemberID,
-        RemoteMemberSocketID: data.LocalMemberSocketID
-      };
-      StartBeginSocket.emitAllSocketsOfMember(
+    // await socket.on("send-to-reconnect-again", data => {
+    //   console.log("Bị lỗi rồi: ", data.ErrorType);
+    //   let resLocalToRemoveErrorConnect = {
+    //     LocalMemberID: data.LocalMemberID,
+    //     LocalMemberSocketID: data.LocalMemberSocketID,
+    //     RemoteMemberID: data.RemoteMemberID,
+    //     RemoteMemberSocketID: data.RemoteMemberSocketID
+    //   };
+    //   let resRemoveToRemoveErrorConnect = {
+    //     LocalMemberID: data.RemoteMemberID,
+    //     LocalMemberSocketID: data.RemoteMemberSocketID,
+    //     RemoteMemberID: data.LocalMemberID,
+    //     RemoteMemberSocketID: data.LocalMemberSocketID
+    //   };
+    //   StartBeginSocket.emitAllSocketsOfMember(
+    //     membercallsocket,
+    //     data.LocalMemberID,
+    //     io,
+    //     "reconnect-to-call-when-error",
+    //     resLocalToRemoveErrorConnect
+    //   );
+    //   StartBeginSocket.emitAllSocketsOfMember(
+    //     membercallsocket,
+    //     data.RemoteMemberID,
+    //     io,
+    //     "reconnect-to-call-when-error",
+    //     resRemoveToRemoveErrorConnect
+    //   );
+    // });
+
+    //====================================================================================================
+
+    // await socket.on("reconnect-call-peer-members", data => {
+    //   let resLocalToReconnectCall = {
+    //     LocalMemberID: data.LocalMemberID,
+    //     LocalMemberSocketID: data.LocalMemberSocketID,
+    //     RemoteMemberID: data.RemoteMemberID,
+    //     RemoteMemberSocketID: data.RemoteMemberSocketID
+    //   };
+    //   let resRemoteToReconnectCall = {
+    //     LocalMemberID: data.RemoteMemberID,
+    //     LocalMemberSocketID: data.RemoteMemberSocketID,
+    //     RemoteMemberID: data.LocalMemberID,
+    //     RemoteMemberSocketID: data.LocalMemberSocketID
+    //   };
+
+    //   StartBeginSocket.emitAllSocketsOfMember(
+    //     membercallsocket,
+    //     data.LocalMemberID,
+    //     io,
+    //     "remove-error-peer-connection",
+    //     resLocalToReconnectCall
+    //   );
+    //   StartBeginSocket.emitAllSocketsOfMember(
+    //     membercallsocket,
+    //     data.RemoteMemberID,
+    //     io,
+    //     "remove-error-peer-connection",
+    //     resRemoteToReconnectCall
+    //   );
+    // });
+
+    //====================================================================================================
+
+    // socket.on("reconnect-error-peer-connection", data => {
+    //   let resLocalToReconnectConnection = {
+    //     LocalMemberID: data.LocalMemberID,
+    //     LocalMemberSocketID: data.LocalMemberSocketID,
+    //     RemoteMemberID: data.RemoteMemberID,
+    //     RemoteMemberSocketID: data.RemoteMemberSocketID
+    //   };
+    //   let resRemoteToReconnecConnection = {
+    //     LocalMemberID: data.RemoteMemberID,
+    //     LocalMemberSocketID: data.RemoteMemberSocketID,
+    //     RemoteMemberID: data.LocalMemberID,
+    //     RemoteMemberSocketID: data.LocalMemberSocketID
+    //   };
+
+    //   StartBeginSocket.emitAllSocketsOfMember(
+    //     membercallsocket,
+    //     data.LocalMemberID,
+    //     io,
+    //     "connect-all-member-call",
+    //     resLocalToReconnectConnection
+    //   );
+    //   StartBeginSocket.emitAllSocketsOfMember(
+    //     membercallsocket,
+    //     data.RemoteMemberID,
+    //     io,
+    //     "connect-all-member-call",
+    //     resRemoteToReconnecConnection
+    //   );
+    // });
+
+    //====================================================================================================
+
+    socket.on("send-to-check-begin-call-team-video", data => {
+      let checkAlreadyCallTeamVideo = StartBeginSocket.checkJoinedMemberCall(
         membercallsocket,
-        data.LocalMemberID,
-        io,
-        "reconnect-to-call-when-error",
-        resLocalToRemoveErrorConnect
+        data.MemberID
       );
-      StartBeginSocket.emitAllSocketsOfMember(
-        membercallsocket,
-        data.RemoteMemberID,
-        io,
-        "reconnect-to-call-when-error",
-        resRemoveToRemoveErrorConnect
+
+      console.log(
+        "Ra cái checkAlreadyCallTeamVideo ",
+        checkAlreadyCallTeamVideo
       );
+
+      io.sockets.in(socket.id).emit("receive-to-check-begin-call-team-video", {
+        MemberID: data.MemberID,
+        SocketID: socket.id,
+        CheckAlreadyCallTeamVideo: checkAlreadyCallTeamVideo
+      });
     });
 
     //====================================================================================================
-    await socket.on("reconnect-call-peer-members", data => {
-      let resLocalToReconnectCall = {
-        LocalMemberID: data.LocalMemberID,
-        LocalMemberSocketID: data.LocalMemberSocketID,
-        RemoteMemberID: data.RemoteMemberID,
-        RemoteMemberSocketID: data.RemoteMemberSocketID
-      };
-      let resRemoteToReconnectCall = {
-        LocalMemberID: data.RemoteMemberID,
-        LocalMemberSocketID: data.RemoteMemberSocketID,
-        RemoteMemberID: data.LocalMemberID,
-        RemoteMemberSocketID: data.LocalMemberSocketID
-      };
-
-      StartBeginSocket.emitAllSocketsOfMember(
-        membercallsocket,
-        data.LocalMemberID,
-        io,
-        "remove-error-peer-connection",
-        resLocalToReconnectCall
-      );
-      StartBeginSocket.emitAllSocketsOfMember(
-        membercallsocket,
-        data.RemoteMemberID,
-        io,
-        "remove-error-peer-connection",
-        resRemoteToReconnectCall
-      );
-    });
-    //====================================================================================================
-
-    socket.on("reconnect-error-peer-connection", data => {
-      let resLocalToReconnectConnection = {
-        LocalMemberID: data.LocalMemberID,
-        LocalMemberSocketID: data.LocalMemberSocketID,
-        RemoteMemberID: data.RemoteMemberID,
-        RemoteMemberSocketID: data.RemoteMemberSocketID
-      };
-      let resRemoteToReconnecConnection = {
-        LocalMemberID: data.RemoteMemberID,
-        LocalMemberSocketID: data.RemoteMemberSocketID,
-        RemoteMemberID: data.LocalMemberID,
-        RemoteMemberSocketID: data.LocalMemberSocketID
-      };
-
-      StartBeginSocket.emitAllSocketsOfMember(
-        membercallsocket,
-        data.LocalMemberID,
-        io,
-        "connect-all-member-call",
-        resLocalToReconnectConnection
-      );
-      StartBeginSocket.emitAllSocketsOfMember(
-        membercallsocket,
-        data.RemoteMemberID,
-        io,
-        "connect-all-member-call",
-        resRemoteToReconnecConnection
-      );
-    });
 
     // //====================================================================================================
 

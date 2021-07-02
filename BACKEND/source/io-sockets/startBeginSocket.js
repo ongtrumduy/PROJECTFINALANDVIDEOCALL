@@ -15,7 +15,7 @@ class BeginSocket {
   emitAllSocketsOfMember(membersocket, memberID, io, eventEmit, data) {
     if (membersocket[memberID]) {
       membersocket[memberID].forEach(socketid => {
-        console.log("Bắn ra socketid " + socketid);
+        // console.log("Bắn ra socketid " + socketid);
         return io.sockets.in(socketid).emit(eventEmit, data);
       });
     }
@@ -23,7 +23,7 @@ class BeginSocket {
 
   emitAllSocketsOfMemberTeam(membersocket, teamID, io, eventEmit, data) {
     let teamMemberList = zeamsTeams.getAllMemberIDsOfTeam(teamID);
-    console.log("RA cái teamMemberList xem sao ", teamMemberList);
+    // console.log("RA cái teamMemberList xem sao ", teamMemberList);
     teamMemberList.forEach(memberitem => {
       this.emitAllSocketsOfMember(
         membersocket,

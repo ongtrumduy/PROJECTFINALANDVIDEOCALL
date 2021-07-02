@@ -52,7 +52,11 @@ export default class UserContent extends React.Component {
         );
       default:
         return (
-          <Teams MemberID={this.props.MemberID} socket={this.props.socket} />
+          <Teams
+            MemberID={this.props.MemberID}
+            socket={this.props.socket}
+            localhostclientIP={this.props.localhostclientIP}
+          />
         );
     }
   };

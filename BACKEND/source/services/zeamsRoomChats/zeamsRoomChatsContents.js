@@ -202,7 +202,7 @@ class ZeamsRoomChatsContents {
   //-----------------------------------------------------------------------------------------------------------------
 
   deleteAndRemoveMemberChatContentFromList(roomchatinfor) {
-    zeamsRoomChats.removeMemberOfAllMemberChatRoomList(data);
+    zeamsRoomChats.removeMemberOfAllMemberChatRoomList(roomchatinfor);
 
     let roommemberindex = this.ZeamsRoomChatsContents.findIndex(
       roomchatitem => {

@@ -152,28 +152,32 @@ class ZeamsReminders {
     let reminderindex = this.ZeamsReminders.findIndex(reminderitem => {
       return reminderitem.MemberID === reminderinfor.MemberID;
     });
-    let reminderunfinishedindex = this.ZeamsReminders[
-      reminderindex
-    ].MemberReminderUnfinishedList.findIndex(reminderunfinisheditem => {
-      return reminderunfinisheditem.ReminderID === reminderinfor.ReminderID;
-    });
+    if (reminderindex >= 0) {
+      let reminderunfinishedindex = this.ZeamsReminders[
+        reminderindex
+      ].MemberReminderUnfinishedList.findIndex(reminderunfinisheditem => {
+        return reminderunfinisheditem.ReminderID === reminderinfor.ReminderID;
+      });
 
-    this.ZeamsReminders[reminderindex].MemberReminderUnfinishedList[
-      reminderunfinishedindex
-    ].ReminderType = "finished";
+      if (reminderunfinishedindex >= 0) {
+        this.ZeamsReminders[reminderindex].MemberReminderUnfinishedList[
+          reminderunfinishedindex
+        ].ReminderType = "finished";
 
-    this.ZeamsReminders[reminderindex].MemberReminderFinishedList.unshift(
-      this.ZeamsReminders[reminderindex].MemberReminderUnfinishedList[
-        reminderunfinishedindex
-      ]
-    );
+        this.ZeamsReminders[reminderindex].MemberReminderFinishedList.unshift(
+          this.ZeamsReminders[reminderindex].MemberReminderUnfinishedList[
+            reminderunfinishedindex
+          ]
+        );
 
-    this.ZeamsReminders[reminderindex].MemberReminderUnfinishedList.splice(
-      reminderunfinishedindex,
-      1
-    );
+        this.ZeamsReminders[reminderindex].MemberReminderUnfinishedList.splice(
+          reminderunfinishedindex,
+          1
+        );
 
-    this.saveDataJSON();
+        this.saveDataJSON();
+      }
+    }
   }
 
   //-----------------------------------------------------------------------------------------------------------------
@@ -182,28 +186,32 @@ class ZeamsReminders {
     let reminderindex = this.ZeamsReminders.findIndex(reminderitem => {
       return reminderitem.MemberID === reminderinfor.MemberID;
     });
-    let reminderfinishedindex = this.ZeamsReminders[
-      reminderindex
-    ].MemberReminderFinishedList.findIndex(reminderunfinisheditem => {
-      return reminderunfinisheditem.ReminderID === reminderinfor.ReminderID;
-    });
+    if (reminderindex >= 0) {
+      let reminderfinishedindex = this.ZeamsReminders[
+        reminderindex
+      ].MemberReminderFinishedList.findIndex(reminderunfinisheditem => {
+        return reminderunfinisheditem.ReminderID === reminderinfor.ReminderID;
+      });
 
-    this.ZeamsReminders[reminderindex].MemberReminderFinishedList[
-      reminderfinishedindex
-    ].ReminderType = "unfinished";
+      if (reminderfinishedindex >= 0) {
+        this.ZeamsReminders[reminderindex].MemberReminderFinishedList[
+          reminderfinishedindex
+        ].ReminderType = "unfinished";
 
-    this.ZeamsReminders[reminderindex].MemberReminderUnfinishedList.unshift(
-      this.ZeamsReminders[reminderindex].MemberReminderFinishedList[
-        reminderfinishedindex
-      ]
-    );
+        this.ZeamsReminders[reminderindex].MemberReminderUnfinishedList.unshift(
+          this.ZeamsReminders[reminderindex].MemberReminderFinishedList[
+            reminderfinishedindex
+          ]
+        );
 
-    this.ZeamsReminders[reminderindex].MemberReminderFinishedList.splice(
-      reminderfinishedindex,
-      1
-    );
+        this.ZeamsReminders[reminderindex].MemberReminderFinishedList.splice(
+          reminderfinishedindex,
+          1
+        );
 
-    this.saveDataJSON();
+        this.saveDataJSON();
+      }
+    }
   }
 
   //-----------------------------------------------------------------------------------------------------------------

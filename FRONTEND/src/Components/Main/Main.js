@@ -9,15 +9,20 @@ export default class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      MemberID: ""
+      MemberID: "",
+      localhostserverIP: "https://192.168.0.108:8081",
+      localhostclientIP: "https://192.168.0.108:3000"
     };
   }
 
   componentDidMount = () => {
-    // const linklocalbackend = "http://40.88.10.237:8081";
-    // const linklocalbackend = "http://localhost:8081";
+    // window.open(
+    //   `${this.state.localhostserverIP}`,
+    //   "_blank",
+    //   "toolbar=0,location=0,menubar=0"
+    // );
 
-    this.socket = ioclient("https://localhost:8081", {
+    this.socket = ioclient(this.state.localhostserverIP, {
       withCredentials: true,
       extraHeaders: {
         "my-custom-header": "abcd"
@@ -35,7 +40,7 @@ export default class Main extends React.Component {
   };
 
   render() {
-    console.log("SAng cái memberID ", this.state.MemberID);
+    // console.log("SAng cái memberID ", this.state.MemberID);
 
     return (
       <div>
@@ -49,18 +54,12 @@ export default class Main extends React.Component {
                 socket={this.socket}
                 MemberID={this.state.MemberID}
                 setMemberIDForMemberLogin={this.setMemberIDForMemberLogin}
+                localhostclientIP={this.state.localhostclientIP}
               />
             )}
           />
           <Route
             path="/videoteamcall/MemberID=:MemberID&&TeamID=:TeamID"
-            // render={props => (
-            //   <VideoTeamCall
-            // {...props}
-            // socket={this.socket}
-            // MemberID={this.state.MemberID}
-            //   />
-            // )}
             render={props => <VideoTeamCall {...props} />}
           />
         </Switch>

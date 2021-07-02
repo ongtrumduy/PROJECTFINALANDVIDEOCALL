@@ -20,13 +20,13 @@ export default class UserHeader extends React.Component {
       MemberID: this.props.MemberID
     });
 
-    if (this.props.TeamCallID !== "") {
-      this.props.socket.emit("disconnected-call-team-logout", {
-        TeamCallID: this.props.TeamCallID,
-        MemberID: this.props.MemberID,
-        MemberSocketID: this.props.socket.id
-      });
-    }
+    // if (this.props.TeamCallID !== "") {
+    //   this.props.socket.emit("disconnected-call-team-logout", {
+    //     TeamCallID: this.props.TeamCallID,
+    //     MemberID: this.props.MemberID,
+    //     MemberSocketID: this.props.socket.id
+    //   });
+    // }
   };
 
   render() {

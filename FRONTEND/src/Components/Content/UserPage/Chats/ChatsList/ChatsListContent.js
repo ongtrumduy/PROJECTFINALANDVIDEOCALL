@@ -6,6 +6,8 @@ import ChatsListContentItem from "./ChatsListContentItem";
 export default class ChatsListContent extends React.Component {
   constructor(props) {
     super(props);
+    this.mounted = false;
+    this.semounted = false;
     this.state = {
       RoomChatMemberList: [],
       MemberChoiceToChatID: "",
@@ -77,36 +79,50 @@ export default class ChatsListContent extends React.Component {
   };
 
   componentDidMount = () => {
+    this.axiosmounted = true;
     axios
       .post("./getallroomchatmemberlist", {
         MemberID: this.props.MemberID
       })
       .then(res => {
         // console.log("Dữ liệu đổ về cho bố", res.data);
-        if (res.data.RoomChatMemberList.length !== 0) {
-          this.props.setCheckNonMemberToChat(true);
-          if (this.state.MemberChoiceToChatID === "") {
-            this.setMemberChoiceToChatID(
-              res.data.FirstMemberChat.MemberID,
-              res.data.FirstMemberChat.MemberFullName,
-              res.data.FirstMemberChat.BannedMemberChat
-            );
-            // this.props.socket.emit("send-to-change-seen-member-of-list", {
-            //   MemberID: this.props.MemberID,
-            //   MemberChatID: res.data.FirstMemberChat.MemberID
-            // });
-            this.props.setCheckBannedOfMemberChat(
-              res.data.FirstMemberChat.BannedMemberChat
-            );
+        if (this.axiosmounted) {
+          if (res.data.RoomChatMemberList.length !== 0) {
+            this.props.setCheckNonMemberToChat(true);
+            if (this.state.MemberChoiceToChatID === "") {
+              this.setMemberChoiceToChatID(
+                res.data.FirstMemberChat.MemberID,
+                res.data.FirstMemberChat.MemberFullName,
+                res.data.FirstMemberChat.BannedMemberChat
+              );
+              this.setMemberChoiceToChatID(
+                res.data.FirstMemberChat.MemberID,
+                res.data.FirstMemberChat.MemberFullName,
+                res.data.FirstMemberChat.BannedMemberChat
+              );
+              this.setMemberChoiceToChatID(
+                res.data.FirstMemberChat.MemberID,
+                res.data.FirstMemberChat.MemberFullName,
+                res.data.FirstMemberChat.BannedMemberChat
+              );
+              // this.props.socket.emit("send-to-change-seen-member-of-list", {
+              //   MemberID: this.props.MemberID,
+              //   MemberChatID: res.data.FirstMemberChat.MemberID
+              // });
+              this.props.setCheckBannedOfMemberChat(
+                res.data.FirstMemberChat.BannedMemberChat
+              );
+            }
+          } else {
+            this.props.setCheckNonMemberToChat(false);
           }
-        } else {
-          this.props.setCheckNonMemberToChat(false);
-        }
 
-        this.setState({
-          RoomChatMemberList: res.data.RoomChatMemberList
-        });
-      });
+          this.setState({
+            RoomChatMemberList: res.data.RoomChatMemberList
+          });
+        }
+      })
+      .catch(error => console.log(error));
 
     this.mounted = true;
     this.semounted = true;
@@ -122,13 +138,23 @@ export default class ChatsListContent extends React.Component {
     });
 
     this.props.socket.on("update-all-member-of-chat-list", data => {
-      console.log("Lấy dữ liệu về đây ", data);
+      // console.log("Lấy dữ liệu về đây ", data);
       if (this.mounted) {
         if (this.props.MemberID === data.MemberID) {
           if (data.RoomChatMemberList.length !== 0) {
             this.props.setCheckNonMemberToChat(true);
 
             if (this.state.MemberChoiceToChatID === "") {
+              this.setMemberChoiceToChatID(
+                data.FirstMemberChat.MemberID,
+                data.FirstMemberChat.MemberFullName,
+                data.FirstMemberChat.BannedMemberChat
+              );
+              this.setMemberChoiceToChatID(
+                data.FirstMemberChat.MemberID,
+                data.FirstMemberChat.MemberFullName,
+                data.FirstMemberChat.BannedMemberChat
+              );
               this.setMemberChoiceToChatID(
                 data.FirstMemberChat.MemberID,
                 data.FirstMemberChat.MemberFullName,
@@ -155,6 +181,7 @@ export default class ChatsListContent extends React.Component {
   };
 
   componentWillUnmount = () => {
+    this.axiosmounted = false;
     this.mounted = false;
     this.semounted = false;
   };

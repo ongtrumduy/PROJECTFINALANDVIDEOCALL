@@ -3,6 +3,7 @@ import React from "react";
 export default class ExcercisesPrivateListContent extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
   render() {

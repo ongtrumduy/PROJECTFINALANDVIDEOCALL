@@ -55,7 +55,8 @@ let io = socketio(sslServer, {
       "http://192.168.1.194:3000",
       "http://192.168.0.108:3000",
       "https://192.168.0.108:3000",
-      "https://192.168.1.203:3000"
+      "https://192.168.1.203:3000",
+      "https://192.168.5.59:3000"
     ],
     methods: ["GET", "POST"],
     allowedHeaders: ["my-custom-header"],
