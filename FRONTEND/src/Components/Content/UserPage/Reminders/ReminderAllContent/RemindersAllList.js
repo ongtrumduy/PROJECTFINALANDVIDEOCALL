@@ -97,6 +97,7 @@ export default class RemindersAllList extends React.Component {
               ReminderType={this.state.ReminderChoiceType}
               MemberID={this.props.MemberID}
               socket={this.props.socket}
+              checkToChangeUnOrFinished={this.state.checkToChangeUnOrFinished}
               setCheckToChangeUnOrFinished={this.setCheckToChangeUnOrFinished}
             />
             <RemindersAllFinishedList
@@ -109,7 +110,13 @@ export default class RemindersAllList extends React.Component {
             />
           </div>
         ) : (
-          <p style={{ color: "blue", fontWeight: "bold", textAlign: "center" }}>
+          <p
+            style={{
+              color: "blue",
+              fontWeight: "bold",
+              textAlign: "center"
+            }}
+          >
             Đang tải dữ liệu các Nhắc nhở-Ghi chú....
           </p>
         )}

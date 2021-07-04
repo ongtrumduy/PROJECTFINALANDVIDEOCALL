@@ -57,7 +57,7 @@ export default class TeamsCreateTeam extends React.Component {
             MemberID: this.props.MemberID,
             TeamID: res.data.TeamID
           });
-          setTimeout(() => {
+          this.timeout = setTimeout(() => {
             this.props.updateRenderTeamControl("teamall");
           }, 1000);
         }
@@ -65,6 +65,12 @@ export default class TeamsCreateTeam extends React.Component {
       .catch(error => {
         console.log(error);
       });
+  };
+
+  componentWillUnmount = () => {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
   };
 
   handleCreateNewTeam = event => {

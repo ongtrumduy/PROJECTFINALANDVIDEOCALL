@@ -58,7 +58,7 @@ export default class TeamsAddCodeTeam extends React.Component {
             MemberID: this.props.MemberID,
             TeamID: this.state.TeamCodeToJoin
           });
-          setTimeout(() => {
+          this.timeout = setTimeout(() => {
             this.props.updateRenderTeamControl("teamall");
           }, 1000);
         }
@@ -66,6 +66,12 @@ export default class TeamsAddCodeTeam extends React.Component {
       .catch(error => {
         console.log(error);
       });
+  };
+
+  componentWillUnmount = () => {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
   };
 
   addCodeTeamForm = () => {

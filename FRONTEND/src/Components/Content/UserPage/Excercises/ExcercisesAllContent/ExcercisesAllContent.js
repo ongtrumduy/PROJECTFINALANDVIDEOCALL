@@ -1,4 +1,5 @@
 import React from "react";
+
 import "./ExcercisesAllContent.css";
 
 import ExcercisesAllList from "./ExcercisesAllList";
@@ -9,6 +10,18 @@ export default class ExcercisesAllContent extends React.Component {
     this.state = {};
   }
 
+  sendToCreateNewExcercise = () => {
+    this.timeout = setTimeout(() => {
+      this.props.updateRenderExcerciseControl("createexcercisenew");
+    }, 200);
+  };
+
+  componentWillUnmount = () => {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
+  };
+
   render() {
     return (
       <div className="user-excercises_all">
@@ -17,11 +30,7 @@ export default class ExcercisesAllContent extends React.Component {
             <p>Bộ đề - Bài tập trắc nghiệm</p>
           </div>
           <div className="user-excercises_all__control___button">
-            <button
-              onClick={() =>
-                this.props.updateRenderExcerciseControl("createexcercisenew")
-              }
-            >
+            <button onClick={() => this.sendToCreateNewExcercise()}>
               Tạo Bộ đề - Bài tập mới
             </button>
           </div>

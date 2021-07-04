@@ -38,12 +38,18 @@ export default class ExcercisesCreateNew extends React.Component {
       ExcerciseDescription: "",
       ExcerciseNumberQuestion: "1",
       ExcerciseType: "public",
-      ExcerciseID: ""
+      ExcerciseID: "",
+      modalHavedExcerciseNameIsOpen: false,
+      modalNonExcerciseNameIsOpen: false,
+      modalConfirmCreateIsOpen: false,
+      modalTooMoreIsOpen: false
     };
   }
 
   openHavedExcerciseNameModal = () => {
-    this.setState({ modalHavedExcerciseNameIsOpen: true });
+    this.setState({
+      modalHavedExcerciseNameIsOpen: true
+    });
   };
 
   closeHavedExcerciseNameModal = () => {
@@ -53,27 +59,39 @@ export default class ExcercisesCreateNew extends React.Component {
   };
 
   openValidateExcerciseNameModal = () => {
-    this.setState({ modalNonExcerciseNameIsOpen: true });
+    this.setState({
+      modalNonExcerciseNameIsOpen: true
+    });
   };
 
   closeValidateExcerciseNameModal = () => {
-    this.setState({ modalNonExcerciseNameIsOpen: false });
+    this.setState({
+      modalNonExcerciseNameIsOpen: false
+    });
   };
 
   openConfirmCreateModal = () => {
-    this.setState({ modalConfirmCreateIsOpen: true });
+    this.setState({
+      modalConfirmCreateIsOpen: true
+    });
   };
 
   closeConfirmCreateModal = () => {
-    this.setState({ modalConfirmCreateIsOpen: false });
+    this.setState({
+      modalConfirmCreateIsOpen: false
+    });
   };
 
   openTooMoreModal = () => {
-    this.setState({ modalTooMoreIsOpen: true });
+    this.setState({
+      modalTooMoreIsOpen: true
+    });
   };
 
   closeTooMoreModal = () => {
-    this.setState({ modalTooMoreIsOpen: false });
+    this.setState({
+      modalTooMoreIsOpen: false
+    });
   };
 
   handleChooseExcerciseLogo = event => {
@@ -97,22 +115,17 @@ export default class ExcercisesCreateNew extends React.Component {
     }
   };
 
-  sentToCreateNewReminder = () => {
+  sendToCheckCreateNewExcercise = () => {
     axios
-      .post("/createnewexcercisecontent", {
-        MemberID: this.props.MemberID,
-        ExcerciseName: this.state.ExcerciseName,
-        ExcerciseDescription: this.state.ExcerciseDescription,
-        ExcerciseLogo: this.state.setExcerciseLogoChoose,
-        ExcerciseCreateMemberID: this.props.MemberID,
-        ExcerciseType: this.state.ExcerciseType,
-        ExcerciseNumberQuestion: this.state.ExcerciseNumberQuestion
+      .post("/checktocreatenewexcercise", {
+        ExcerciseName: this.state.ExcerciseName
       })
       .then(res => {
+        // console.log("Về cái res data xem ", res.data);
         this.setState({
           checkValidate: res.data.checkValidate
         });
-        if (res.data.checkValidate === "success-create-excercise") {
+        if (res.data.checkValidate === "success-check-create-excercise") {
           this.setState({
             ExcerciseID: res.data.ExcerciseID
           });
@@ -129,7 +142,7 @@ export default class ExcercisesCreateNew extends React.Component {
   };
 
   handleCreateNewExcercise = event => {
-    this.sentToCreateNewReminder();
+    this.sendToCheckCreateNewExcercise();
 
     event.preventDefault();
   };
@@ -137,14 +150,20 @@ export default class ExcercisesCreateNew extends React.Component {
   changeToCreateNewQAContent = () => {
     this.props.setExcerciseContentToCreateQAContent(
       this.state.ExcerciseName,
+      this.state.ExcerciseDescription,
       this.state.ExcerciseNumberQuestion,
       this.state.ExcerciseType,
-      this.state.setExcerciseLogoChoose,
-      this.state.ExcerciseID
+      this.state.setExcerciseLogoChoose
     );
-    setTimeout(() => {
+    this.timeout = setTimeout(() => {
       this.props.updateRenderExcerciseCreateNewControl("createnewQAcontent");
-    }, 1000);
+    }, 800);
+  };
+
+  componentWillUnmount = () => {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
   };
 
   createNewExcerciseForm = () => {
@@ -299,7 +318,8 @@ export default class ExcercisesCreateNew extends React.Component {
               bottom: "auto",
               marginRight: "-50%",
               transform: "translate(-50%, -50%)",
-              backgroundColor: "#ecf0f1"
+              backgroundColor: "#ecf0f1",
+              userSelect: "none"
             }
           }}
           ariaHideApp={false}
@@ -330,7 +350,8 @@ export default class ExcercisesCreateNew extends React.Component {
               bottom: "auto",
               marginRight: "-50%",
               transform: "translate(-50%, -50%)",
-              backgroundColor: "#ecf0f1"
+              backgroundColor: "#ecf0f1",
+              userSelect: "none"
             }
           }}
           ariaHideApp={false}

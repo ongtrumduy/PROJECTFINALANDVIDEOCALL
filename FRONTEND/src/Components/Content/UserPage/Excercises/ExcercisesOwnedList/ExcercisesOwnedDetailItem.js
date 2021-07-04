@@ -6,6 +6,8 @@ import axios from "axios";
 export default class ExcercisesOwnedDetailItem extends React.Component {
   constructor(props) {
     super(props);
+    this.mounted = false;
+    this.axiosmounted = false;
     this.state = {
       checkOwnedExcerciseItem: true,
       checkConfirmDoExcercisesChoiceIsOpen: false,
@@ -18,28 +20,39 @@ export default class ExcercisesOwnedDetailItem extends React.Component {
       ExcerciseLogo: "",
       ExcerciseType: "",
       ExcerciseNumberQuestion: "",
-      ExcerciseID: ""
+      ExcerciseID: "",
+      checkLoadingExcerciseDetailItem: false
     };
   }
 
   componentDidMount = () => {
+    this.axiosmounted = true;
+
     axios
       .post("/getexcerciseownedetailitem", {
         ExcerciseID: this.props.ExcerciseID,
         MemberID: this.props.MemberID
       })
       .then(res => {
-        this.setState({
-          ExcerciseName: res.data.ExcerciseInfor.ExcerciseName,
-          ExcerciseDescription: res.data.ExcerciseInfor.ExcerciseDescription,
-          ExcerciseLogo: res.data.ExcerciseInfor.ExcerciseLogo,
-          ExcerciseType: res.data.ExcerciseInfor.ExcerciseType,
-          ExcerciseNumberQuestion:
-            res.data.ExcerciseInfor.ExcerciseNumberQuestion,
-          ExcerciseID: res.data.ExcerciseInfor.ExcerciseID
-        });
+        if (this.axiosmounted) {
+          this.setState({
+            ExcerciseName: res.data.ExcerciseInfor.ExcerciseName,
+            ExcerciseDescription: res.data.ExcerciseInfor.ExcerciseDescription,
+            ExcerciseLogo: res.data.ExcerciseInfor.ExcerciseLogo,
+            ExcerciseType: res.data.ExcerciseInfor.ExcerciseType,
+            ExcerciseNumberQuestion:
+              res.data.ExcerciseInfor.ExcerciseNumberQuestion,
+            ExcerciseID: res.data.ExcerciseInfor.ExcerciseID
+          });
+        }
       })
       .catch(error => console.log(error));
+
+    this.timeout = setTimeout(() => {
+      this.setState({
+        checkLoadingExcerciseDetailItem: true
+      });
+    }, 900);
 
     this.mounted = true;
 
@@ -59,7 +72,11 @@ export default class ExcercisesOwnedDetailItem extends React.Component {
   };
 
   componentWillUnmount = () => {
+    this.axiosmounted = false;
     this.mounted = false;
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
   };
 
   openConfirmDoExcercisesChoiceModal = () => {
@@ -85,6 +102,7 @@ export default class ExcercisesOwnedDetailItem extends React.Component {
       checkAddSuccessExcerciseItemIsOpen: false
     });
   };
+
   openCheckRemoveSuccessExcerciseItemModal = () => {
     this.setState({
       checkRemoveSuccessExcerciseItemIsOpen: true
@@ -210,7 +228,10 @@ export default class ExcercisesOwnedDetailItem extends React.Component {
         <div className="user-excercises_all-list__owned-list___owned-item_____excercise-logo-and-content">
           <div className="user-excercises_all-list__owned-list___owned-item_____excercise-logo">
             <img src={this.state.ExcerciseLogo} alt="excercise-logo" />
-            <p>Mã: {this.state.ExcerciseID}</p>
+            <p>
+              <span>Mã: </span>
+              {this.state.ExcerciseID}
+            </p>
           </div>
           <div className="user-excercises_all-list__owned-list___owned-item_____excercise-content">
             <div>
@@ -228,10 +249,8 @@ export default class ExcercisesOwnedDetailItem extends React.Component {
               </p>
               <p>
                 <span>
-                  {" "}
                   Số lượng câu hỏi &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :{" "}
                 </span>
-
                 {this.state.ExcerciseNumberQuestion}
               </p>
               <p>
@@ -313,8 +332,16 @@ export default class ExcercisesOwnedDetailItem extends React.Component {
 
   render() {
     return (
-      <div className="user-excercises_all-list__owned-list___owned-item">
-        {this.renderExcerciseOWnedDetailItemContent()}
+      <div>
+        {this.state.checkLoadingExcerciseDetailItem ? (
+          <div className="user-excercises_all-list__owned-list___owned-item">
+            {this.renderExcerciseOWnedDetailItemContent()}
+          </div>
+        ) : (
+          <p style={{ color: "blue", fontWeight: "bold", userSelect: "none" }}>
+            Đang lấy dữ liệu chi tiết của Bộ đề-Bài tập...
+          </p>
+        )}
 
         <Modal
           style={{

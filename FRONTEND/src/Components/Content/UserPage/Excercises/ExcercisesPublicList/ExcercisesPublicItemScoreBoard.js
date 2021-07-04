@@ -6,6 +6,7 @@ import axios from "axios";
 export default class ExcercisesPublicItemScoreBoard extends React.Component {
   constructor(props) {
     super(props);
+    this.axiosmounted = false;
     this.state = {
       CurrentExcerciseItemResultList: [],
       NumberScoreItemOnPage: "6",
@@ -15,7 +16,8 @@ export default class ExcercisesPublicItemScoreBoard extends React.Component {
       checkValidatePrevLeft: true,
       checkValidateNextRight: false,
       overIndexScoreItemIsOpen: false,
-      AllNumberOfScoreItemOnPageList: []
+      AllNumberOfScoreItemOnPageList: [],
+      checkLoadingExcerciseItemScoreBoard: false
     };
   }
 
@@ -32,6 +34,8 @@ export default class ExcercisesPublicItemScoreBoard extends React.Component {
   };
 
   componentDidMount = () => {
+    this.axiosmounted = true;
+
     axios
       .post("/getexcericseitemscoreboard", {
         ExcerciseID: this.props.ExcerciseID,
@@ -42,25 +46,31 @@ export default class ExcercisesPublicItemScoreBoard extends React.Component {
           .CurrentIndexOfIndexScoreItemPage
       })
       .then(res => {
-        console.log(res.data);
+        if (this.axiosmounted) {
+          const allNumberOfScoreItemOnPageList = [];
+          const scoreItemListLength = res.data.AllNumberExcerciseResult;
 
-        const allNumberOfScoreItemOnPageList = [];
-        const scoreItemListLength = res.data.AllNumberExcerciseResult;
+          const allNumberOfScoreItem = Math.ceil(
+            scoreItemListLength / Number(this.state.NumberScoreItemOnPage)
+          );
 
-        const allNumberOfScoreItem = Math.ceil(
-          scoreItemListLength / Number(this.state.NumberScoreItemOnPage)
-        );
-
-        for (let i = 1; i <= allNumberOfScoreItem; i++) {
-          allNumberOfScoreItemOnPageList.push(i + "");
+          for (let i = 1; i <= allNumberOfScoreItem; i++) {
+            allNumberOfScoreItemOnPageList.push(i + "");
+          }
+          this.setState({
+            AllNumberOfScoreItemOnPageList: allNumberOfScoreItemOnPageList,
+            CurrentExcerciseItemResultList:
+              res.data.CurrentExcerciseItemResultList
+          });
         }
-        this.setState({
-          AllNumberOfScoreItemOnPageList: allNumberOfScoreItemOnPageList,
-          CurrentExcerciseItemResultList:
-            res.data.CurrentExcerciseItemResultList
-        });
       })
       .catch(error => console.log(error));
+
+    this.timeout = setTimeout(() => {
+      this.setState({
+        checkLoadingExcerciseItemScoreBoard: true
+      });
+    }, 800);
   };
 
   renderIndexOfScoreItemList = () => {
@@ -269,18 +279,25 @@ export default class ExcercisesPublicItemScoreBoard extends React.Component {
         <div className="user-excercises_all-list__public-list___public-item_____table-list">
           <table>
             <thead>
-              <th>STT</th>
-              <th>Họ Tên - ID</th>
-              <th>Ngày làm bài</th>
-              <th>Thời gian làm</th>
-              <th>Điểm số</th>
-              <th>Số lần làm</th>
+              <tr>
+                <th>STT</th>
+                <th>Họ Tên - ID</th>
+                <th>Ngày làm bài</th>
+                <th>Thời gian làm</th>
+                <th>Điểm số</th>
+                <th>Số lần làm</th>
+              </tr>
             </thead>
             <tbody>
               {this.state.CurrentExcerciseItemResultList.map(
                 (excerciseitem, excerciseindex) => (
                   <tr key={excerciseindex}>
-                    <td>{Number(excerciseindex) + 1}</td>
+                    <td>
+                      {Number(excerciseindex) +
+                        1 +
+                        (Number(this.state.CurrentIndexScoreItemPage) - 1) *
+                          Number(this.state.NumberScoreItemOnPage)}
+                    </td>
                     <td>
                       {excerciseitem.MemberFullName}-{excerciseitem.MemberID}
                     </td>
@@ -301,9 +318,9 @@ export default class ExcercisesPublicItemScoreBoard extends React.Component {
     );
   };
 
-  render() {
+  renderExcercisePublicItemScoreBoardContent = () => {
     return (
-      <div>
+      <div style={{ userSelect: "none" }}>
         <div
           className="user-excercises_all-list__public-list___public-item_____backtopublicitem"
           onClick={() => this.returnExcerciseItemDetailContent()}
@@ -316,14 +333,28 @@ export default class ExcercisesPublicItemScoreBoard extends React.Component {
           </div>
         </div>
         {this.state.CurrentExcerciseItemResultList.length !== 0 ? (
-          <di>
+          <div>
             {this.renderExcerciseItemScoreBoard()}
             {this.selectIndexForRenderExcerciseScoreItem()}
-          </di>
+          </div>
         ) : (
           <div style={{ fontWeight: "bold" }}>
             <p>Chưa có ai làm bài tập bộ đề này!!!!!</p>
           </div>
+        )}
+      </div>
+    );
+  };
+
+  render() {
+    return (
+      <div style={{ userSelect: "none" }}>
+        {this.state.checkLoadingExcerciseItemScoreBoard ? (
+          <div>{this.renderExcercisePublicItemScoreBoardContent()}</div>
+        ) : (
+          <p style={{ color: "blue", fontWeight: "bold" }}>
+            Đang lấy dữ liệu Bảng xếp hạng của Bộ đề-Bài tập...
+          </p>
         )}
         <Modal
           style={{

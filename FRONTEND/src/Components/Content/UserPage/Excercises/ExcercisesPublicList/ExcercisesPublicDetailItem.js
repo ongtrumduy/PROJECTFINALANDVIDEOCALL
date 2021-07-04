@@ -6,6 +6,8 @@ import axios from "axios";
 export default class ExcercisesPublicDetailItem extends React.Component {
   constructor(props) {
     super(props);
+    this.mounted = false;
+    this.axiosmounted = false;
     this.state = {
       checkPublicExcerciseItem: false,
       checkAddSuccessExcerciseItemIsOpen: false,
@@ -15,43 +17,56 @@ export default class ExcercisesPublicDetailItem extends React.Component {
       ExcerciseLogo: "",
       ExcerciseType: "",
       ExcerciseNumberQuestion: "",
-      ExcerciseID: ""
+      ExcerciseID: "",
+      checkLoadingExcerciseDetailItem: false
     };
   }
 
   componentDidMount = () => {
+    this.axiosmounted = true;
+
     axios
       .post("/getexcercisepublicdetailitem", {
         ExcerciseID: this.props.ExcerciseID,
         MemberID: this.props.MemberID
       })
       .then(res => {
-        // console.log("lấy dữ liệu trả về", res.data);
-        if (res.data.CheckExcerciseItemInOwned) {
-          this.setState({
-            ExcerciseName: res.data.ExcerciseInfor.ExcerciseName,
-            ExcerciseDescription: res.data.ExcerciseInfor.ExcerciseDescription,
-            ExcerciseLogo: res.data.ExcerciseInfor.ExcerciseLogo,
-            ExcerciseType: res.data.ExcerciseInfor.ExcerciseType,
-            ExcerciseNumberQuestion:
-              res.data.ExcerciseInfor.ExcerciseNumberQuestion,
-            ExcerciseID: res.data.ExcerciseInfor.ExcerciseID,
-            checkPublicExcerciseItem: true
-          });
-        } else {
-          this.setState({
-            ExcerciseName: res.data.ExcerciseInfor.ExcerciseName,
-            ExcerciseDescription: res.data.ExcerciseInfor.ExcerciseDescription,
-            ExcerciseLogo: res.data.ExcerciseInfor.ExcerciseLogo,
-            ExcerciseType: res.data.ExcerciseInfor.ExcerciseType,
-            ExcerciseNumberQuestion:
-              res.data.ExcerciseInfor.ExcerciseNumberQuestion,
-            ExcerciseID: res.data.ExcerciseInfor.ExcerciseID,
-            checkPublicExcerciseItem: false
-          });
+        if (this.axiosmounted) {
+          // console.log("lấy dữ liệu trả về", res.data);
+          if (res.data.CheckExcerciseItemInOwned) {
+            this.setState({
+              ExcerciseName: res.data.ExcerciseInfor.ExcerciseName,
+              ExcerciseDescription:
+                res.data.ExcerciseInfor.ExcerciseDescription,
+              ExcerciseLogo: res.data.ExcerciseInfor.ExcerciseLogo,
+              ExcerciseType: res.data.ExcerciseInfor.ExcerciseType,
+              ExcerciseNumberQuestion:
+                res.data.ExcerciseInfor.ExcerciseNumberQuestion,
+              ExcerciseID: res.data.ExcerciseInfor.ExcerciseID,
+              checkPublicExcerciseItem: true
+            });
+          } else {
+            this.setState({
+              ExcerciseName: res.data.ExcerciseInfor.ExcerciseName,
+              ExcerciseDescription:
+                res.data.ExcerciseInfor.ExcerciseDescription,
+              ExcerciseLogo: res.data.ExcerciseInfor.ExcerciseLogo,
+              ExcerciseType: res.data.ExcerciseInfor.ExcerciseType,
+              ExcerciseNumberQuestion:
+                res.data.ExcerciseInfor.ExcerciseNumberQuestion,
+              ExcerciseID: res.data.ExcerciseInfor.ExcerciseID,
+              checkPublicExcerciseItem: false
+            });
+          }
         }
       })
       .catch(error => console.log(error));
+
+    this.timeout = setTimeout(() => {
+      this.setState({
+        checkLoadingExcerciseDetailItem: true
+      });
+    }, 900);
 
     this.mounted = true;
 
@@ -71,7 +86,11 @@ export default class ExcercisesPublicDetailItem extends React.Component {
   };
 
   componentWillUnmount = () => {
+    this.axiosmounted = false;
     this.mounted = false;
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
   };
 
   openCheckAddSuccessExcerciseItemModal = () => {
@@ -185,7 +204,10 @@ export default class ExcercisesPublicDetailItem extends React.Component {
         <div className="user-excercises_all-list__public-list___public-item_____excercise-logo-and-content">
           <div className="user-excercises_all-list__public-list___public-item_____excercise-logo">
             <img src={this.state.ExcerciseLogo} alt="excercise-logo" />
-            <p>Mã: {this.state.ExcerciseID}</p>
+            <p>
+              <span>Mã: </span>
+              {this.state.ExcerciseID}
+            </p>{" "}
           </div>
           <div className="user-excercises_all-list__public-list___public-item_____excercise-content">
             <div>
@@ -269,8 +291,16 @@ export default class ExcercisesPublicDetailItem extends React.Component {
 
   render() {
     return (
-      <div className="user-excercises_all-list__public-list___public-item">
-        {this.renderExcercisePublicDetailItemContent()}
+      <div>
+        {this.state.checkLoadingExcerciseDetailItem ? (
+          <div className="user-excercises_all-list__public-list___public-item">
+            {this.renderExcercisePublicDetailItemContent()}{" "}
+          </div>
+        ) : (
+          <p style={{ color: "blue", fontWeight: "bold", userSelect: "none" }}>
+            Đang lấy dữ liệu chi tiết của Bộ đề-Bài tập...
+          </p>
+        )}
         <Modal
           style={{
             content: {

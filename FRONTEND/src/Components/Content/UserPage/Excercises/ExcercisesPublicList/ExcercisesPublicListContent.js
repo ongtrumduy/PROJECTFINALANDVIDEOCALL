@@ -72,7 +72,7 @@ export default class ExcercisesPublicListContent extends React.Component {
       this.setState({
         checkLoadingExcercisePublicList: true
       });
-    }, 1000);
+    }, 2000);
 
     this.semounted = true;
     this.mounted = true;
@@ -149,9 +149,7 @@ export default class ExcercisesPublicListContent extends React.Component {
   choiceExcercisePublicItemToDetail = excerciseID => {
     this.props.getExcercisePublicIDMemberChoice(excerciseID);
 
-    setTimeout(() => {
-      this.props.updateRenderExcercisePublicControl("publicitem");
-    }, 200);
+    this.props.updateRenderExcercisePublicControl("publicitem");
   };
 
   renderIndexOfExcerciseItemList = () => {

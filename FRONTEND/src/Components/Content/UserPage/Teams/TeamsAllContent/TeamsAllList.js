@@ -36,7 +36,7 @@ export default class TeamsAllList extends React.Component {
       this.setState({
         checkLoadingTeamListData: true
       });
-    }, 500);
+    }, 1200);
   };
 
   componentWillUnmount = () => {

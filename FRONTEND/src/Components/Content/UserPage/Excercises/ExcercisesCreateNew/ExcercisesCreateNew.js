@@ -26,17 +26,17 @@ export default class ExcercisesCreateNew extends React.Component {
 
   setExcerciseContentToCreateQAContent = (
     excerciseName,
+    excerciseDescription,
     excerciseNumberQuestion,
     excerciseType,
-    excerciseLogo,
-    excerciseID
+    excerciseLogo
   ) => {
     this.setState({
       ExcerciseName: excerciseName,
+      ExcerciseDescription: excerciseDescription,
       ExcerciseNumberQuestion: excerciseNumberQuestion,
       ExcerciseType: excerciseType,
-      ExcerciseLogo: excerciseLogo,
-      ExcerciseID: excerciseID
+      ExcerciseLogo: excerciseLogo
     });
   };
 
@@ -53,8 +53,8 @@ export default class ExcercisesCreateNew extends React.Component {
             updateRenderExcerciseCreateNewControl={
               this.updateRenderExcerciseCreateNewControl
             }
-            ExcerciseID={this.state.ExcerciseID}
             ExcerciseName={this.state.ExcerciseName}
+            ExcerciseDescription={this.state.ExcerciseDescription}
             ExcerciseNumberQuestion={this.state.ExcerciseNumberQuestion}
             ExcerciseType={this.state.ExcerciseType}
             ExcerciseLogo={this.state.ExcerciseLogo}

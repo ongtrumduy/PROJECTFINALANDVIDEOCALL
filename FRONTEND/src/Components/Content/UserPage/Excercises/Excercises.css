@@ -25,6 +25,7 @@
     text-align: left;
     font-weight: bold;
     margin: 0 0 0 24px;
+    user-select: none;
 }
 
 .user-excercises_all__control___button {
@@ -33,6 +34,7 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
+    user-select: none;
 }
 
 .user-excercises_all__control___button button {

@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 
 import Modal from "react-modal";
 
@@ -24,20 +23,7 @@ export default class ExcercisesCreateQAndAMainInfor extends React.Component {
   };
 
   cancelCreateNewExcercise = () => {
-    axios
-      .post("./cancelcreatenewexcercise", {
-        MemberID: this.props.MemberID,
-        ExcerciseType: this.props.ExcerciseType,
-        Excercise: this.props.ExcerciseID
-      })
-      .then(res => {
-        if (res.data.checkValidate === "remove-success") {
-          setTimeout(() => {
-            this.props.updateRenderExcerciseControl("excerciseall");
-          }, 1000);
-        }
-      })
-      .catch(error => console.log(error));
+    this.props.updateRenderExcerciseControl("excerciseall");
   };
 
   cancelCreateNewAndBackToList = () => {
@@ -58,7 +44,7 @@ export default class ExcercisesCreateQAndAMainInfor extends React.Component {
             <span>Hủy tạo </span>
           </div>
         </div>
-        {/* <div className="user-excercises_create-new__QandA___infor">
+        <div className="user-excercises_create-new__QandA___infor">
           <div>
             <img src={this.props.ExcerciseLogo} alt="excercise-logo" />
           </div>
@@ -74,7 +60,7 @@ export default class ExcercisesCreateQAndAMainInfor extends React.Component {
               {this.props.ExcerciseType === "public" ? "Công khai" : "Riêng tư"}
             </p>
           </div>
-        </div> */}
+        </div>
 
         <Modal
           style={{

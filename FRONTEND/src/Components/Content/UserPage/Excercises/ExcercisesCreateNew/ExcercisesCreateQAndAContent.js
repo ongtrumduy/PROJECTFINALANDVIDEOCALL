@@ -11,7 +11,6 @@ export default class ExcercisesCreateQAndAContent extends React.Component {
     this.state = {
       ExcerciseAllQAContent: [],
       ExcerciseNthQuestion: "1",
-
       checkValidatePrevLeft: true,
       checkValidateNextRight: false,
       overNumberQuestionIsOpen: false,
@@ -178,7 +177,12 @@ export default class ExcercisesCreateQAndAContent extends React.Component {
       .post("/createnewexcerciseallQAcontent", {
         MemberID: this.props.MemberID,
         ExcerciseAllQAContent: this.state.ExcerciseAllQAContent,
-        ExcerciseID: this.props.ExcerciseID
+        ExcerciseName: this.props.ExcerciseName,
+        ExcerciseDescription: this.props.ExcerciseDescription,
+        ExcerciseLogo: this.props.ExcerciseLogo,
+        ExcerciseCreateMemberID: this.props.MemberID,
+        ExcerciseType: this.props.ExcerciseType,
+        ExcerciseNumberQuestion: this.props.ExcerciseNumberQuestion
       })
       .then(res => {
         // console.log(res.data);
@@ -186,14 +190,20 @@ export default class ExcercisesCreateQAndAContent extends React.Component {
           checkValidate: res.data.checkValidate
         });
         if (res.data.checkValidate === "success-create-excercise-QA-content") {
-          setTimeout(() => {
+          this.timeout = setTimeout(() => {
             this.props.updateRenderExcerciseControl("excerciseall");
-          }, 1000);
+          }, 200);
         }
       })
       .catch(error => {
         console.log(error);
       });
+  };
+
+  componentWillUnmount = () => {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
   };
 
   sendToCompleteExcercises = () => {
@@ -307,11 +317,10 @@ export default class ExcercisesCreateQAndAContent extends React.Component {
           updateRenderExcerciseCreateNewControl={
             this.props.updateRenderExcerciseCreateNewControl
           }
-          ExcerciseID={this.props.ExcerciseID}
-          // ExcerciseName={this.props.ExcerciseName}
-          // ExcerciseNumberQuestion={this.props.ExcerciseNumberQuestion}
-          // ExcerciseType={this.props.ExcerciseType}
-          // ExcerciseLogo={this.props.ExcerciseLogo}
+          ExcerciseName={this.props.ExcerciseName}
+          ExcerciseNumberQuestion={this.props.ExcerciseNumberQuestion}
+          ExcerciseType={this.props.ExcerciseType}
+          ExcerciseLogo={this.props.ExcerciseLogo}
         />
 
         {this.renderExcercisesQAndAContentItem()}

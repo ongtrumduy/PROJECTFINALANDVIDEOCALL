@@ -96,10 +96,8 @@ class ZeamsExcercises {
         checkValidate: "excercisename"
       };
     } else {
-      let ExcerciseID = this.createNewExcercisesContent(excerciseinfor);
       resCheckCreateNewExcercise = {
-        checkValidate: "success-create-excercise",
-        ExcerciseID: ExcerciseID
+        checkValidate: "success-check-create-excercise"
       };
     }
     return resCheckCreateNewExcercise;
@@ -149,7 +147,12 @@ class ZeamsExcercises {
   //-----------------------------------------------------------------------------------------------------------------
 
   responseCreateNewExcerciseQAContent(excerciseinfor) {
-    this.createNewExcerciseAllQAContent(excerciseinfor);
+    let excerciseID = this.createNewExcercisesContent(excerciseinfor);
+    let excerciseQAinfor = {
+      ExcerciseID: excerciseID,
+      ExcerciseAllQAContent: excerciseinfor.ExcerciseAllQAContent
+    };
+    this.createNewExcerciseAllQAContent(excerciseQAinfor);
     let resCreateNewExcerciseQAContent = {
       checkValidate: "success-create-excercise-QA-content"
     };
@@ -211,7 +214,6 @@ class ZeamsExcercises {
   //-----------------------------------------------------------------------------------------------------------------
 
   getAllExcerciseInforForAssignment(excerciseinfor) {
-    console.log("Dữ liệu vào đây ", excerciseinfor);
     let excerciseindex = this.ZeamsExcercises.findIndex(excerciseitem => {
       return excerciseitem.ExcerciseID === excerciseinfor.ExcerciseID;
     });
@@ -220,11 +222,6 @@ class ZeamsExcercises {
 
     let memberDidHighestScoreInfor = zeamsExcercisesMemberResults.getMemberDidHighestScoreForAssignment(
       excerciseinfor
-    );
-
-    console.log(
-      "RA thử kết quả memberDidHighestScoreInfor",
-      memberDidHighestScoreInfor
     );
 
     let getAllExcerciseInfor = {
@@ -236,12 +233,13 @@ class ZeamsExcercises {
       MemberDidHighestScore: memberDidHighestScoreInfor.MemberDidHighestScore
     };
 
-    console.log("RA thử kết quả", getAllExcerciseInfor);
+    // console.log("RA thử kết quả", getAllExcerciseInfor);
 
     return getAllExcerciseInfor;
   }
 
   //-----------------------------------------------------------------------------------------------------------------
+
   //-----------------------------------------------------------------------------------------------------------------
 
   //-----------------------------------------------------------------------------------------------------------------

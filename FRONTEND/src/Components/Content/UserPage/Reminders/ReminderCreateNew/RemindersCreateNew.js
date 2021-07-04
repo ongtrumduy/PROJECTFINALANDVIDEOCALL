@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-import warning111 from "../../../../Main/Image-Icons/11111a.png"
+import warning111 from "../../../../Main/Image-Icons/11111a.png";
 import warning222 from "../../../../Main/Image-Icons/22222b.png";
 import warning333 from "../../../../Main/Image-Icons/33333c.png";
 import warning444 from "../../../../Main/Image-Icons/44444d.png";
@@ -47,7 +47,7 @@ export default class RemindersCreateNew extends React.Component {
           checkValidate: res.data.checkValidate
         });
         if (res.data.checkValidate === "success-create-reminder") {
-          setTimeout(() => {
+          this.timeout = setTimeout(() => {
             this.props.updateRenderReminderControl("reminderall");
           }, 1000);
         }
@@ -55,6 +55,12 @@ export default class RemindersCreateNew extends React.Component {
       .catch(error => {
         console.log(error);
       });
+  };
+
+  componentWillUnmount = () => {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
   };
 
   handleCreateNewReminder = event => {

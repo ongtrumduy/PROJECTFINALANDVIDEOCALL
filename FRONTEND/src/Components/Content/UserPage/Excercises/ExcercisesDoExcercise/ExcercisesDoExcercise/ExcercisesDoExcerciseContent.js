@@ -186,11 +186,11 @@ export default class ExcercisesDoExcerciseContent extends React.Component {
           //   ExcerciseID: this.props.ExcerciseID
           // });
 
-          setTimeout(() => {
+          this.timeout = setTimeout(() => {
             this.props.updateRenderExcerciseDoExcerciseControl(
               "finishexcercise"
             );
-          }, 1500);
+          }, 800);
         }
       })
       .catch(error => {
@@ -200,6 +200,12 @@ export default class ExcercisesDoExcerciseContent extends React.Component {
     this.props.getAllChoiceAndCorrectAnswerList(
       this.state.ExcerciseAllAnswerContent
     );
+  };
+
+  componentWillUnmount = () => {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
   };
 
   excerciseDoExcerciseControl = () => {
@@ -423,7 +429,9 @@ export default class ExcercisesDoExcerciseContent extends React.Component {
             Ấn nhầm!!!
           </button>
         </Modal>
+
         {/*================================================================================= */}
+
         <Modal
           style={{
             content: {

@@ -10,7 +10,7 @@ import getteamdiscusscommentRoutes from "./zeamsTeams/getTeamDiscussComment";
 import getteammemberchatlistRoutes from "./zeamsRoomChats/getTeamMemberChatList";
 import getreminderlistRoutes from "./zeamsReminders/getReminderList";
 import createnewreminderRoutes from "./zeamsReminders/createNewReminder";
-import createnewexcercisecontentRoutes from "./zeamsExcercises/createNewExcerciseContent";
+import checkcreatenewexcercisecontentRoutes from "./zeamsExcercises/checkCreateNewExcerciseContent";
 import createnewexcerciseQAcontentRoutes from "./zeamsExcercises/createNewExcerciseQAContent";
 import getexcerciseownedlistRoutes from "./zeamsExcercises/getExcerciseOwnedList";
 import getexcercisepubliclistRoutes from "./zeamsExcercises/getExcercisePublicList";
@@ -87,8 +87,8 @@ let AllRoutes = (app, corsOptions) => {
   getreminderlistRoutes(app, corsOptions);
   //-----------------------------------------------------------------------
 
-  // --------------------------CreateNewExcerciseContent---------------------------------------
-  createnewexcercisecontentRoutes(app, corsOptions);
+  // --------------------------CheckCreateNewExcerciseContent---------------------------------------
+  checkcreatenewexcercisecontentRoutes(app, corsOptions);
   //-----------------------------------------------------------------------
 
   // --------------------------CreateNewExcerciseQAContent---------------------------------------

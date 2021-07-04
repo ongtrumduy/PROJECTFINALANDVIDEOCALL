@@ -171,7 +171,7 @@
 }
 
 .user-excercises_create-new__QandA___backtoexcerciseall {
-    margin: 40px 0 0 40px;
+    margin: 16px 0 0 40px;
     border: none;
     width: 100px;
     cursor: pointer;
@@ -196,6 +196,7 @@
     justify-content: flex-start;
     align-items: center;
     width: 100%;
+    font-size: 12px;
 }
 
 .user-excercises_create-new__QandA___infor div:nth-child(2) {
@@ -203,8 +204,8 @@
 }
 
 .user-excercises_create-new__QandA___infor img {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     border: groove;
 }
 
@@ -233,12 +234,13 @@
     /* border: groove; */
 }
 
-.user-excercises_create-new__QandA___content___question input {
+.user-excercises_create-new__QandA___content___question textarea {
     width: 72%;
     margin: 0 0 0 16px;
     border: none;
     border-bottom: 2px solid black;
     outline: none;
+    height: 56px;
 }
 
 .user-excercises_create-new__QandA___content___question input:hover {
@@ -263,7 +265,7 @@
     display: flex;
     flex-direction: row;
     justify-content: stretch;
-    align-items: flex-start;
+    align-items: flex-end;
     margin: 20px 0 0 40px;
     /* border: groove; */
     width: 94%;
@@ -278,20 +280,20 @@
     text-align: left;
 }
 
-.user-excercises_create-new__QandA___content____answer_____A______answer-content input {
+.user-excercises_create-new__QandA___content____answer_____A______answer-content textarea {
     margin: 0 0 0 16px;
     border: none;
     border-bottom: 1px solid black;
     outline: none;
-    height: 24px;
+    height: 28px;
     width: 85%;
 }
 
-.user-excercises_create-new__QandA___content____answer_____A______answer-content input:hover {
+.user-excercises_create-new__QandA___content____answer_____A______answer-content textarea:hover {
     border-bottom-color: blue;
 }
 
-.user-excercises_create-new__QandA___content____answer_____A______answer-content input:focus {
+.user-excercises_create-new__QandA___content____answer_____A______answer-content textarea:focus {
     border-bottom-color: green;
 }
 
@@ -299,7 +301,7 @@
     display: flex;
     flex-direction: row;
     justify-content: stretch;
-    align-items: flex-start;
+    align-items: flex-end;
     margin: 20px 0 0 40px;
     /* border: groove; */
     width: 94%;
@@ -314,20 +316,20 @@
     text-align: left;
 }
 
-.user-excercises_create-new__QandA___content____answer_____B______answer-content input {
+.user-excercises_create-new__QandA___content____answer_____B______answer-content textarea {
     margin: 0 0 0 16px;
     border: none;
     border-bottom: 1px solid black;
     outline: none;
-    height: 24px;
+    height: 28px;
     width: 85%;
 }
 
-.user-excercises_create-new__QandA___content____answer_____B______answer-content input:hover {
+.user-excercises_create-new__QandA___content____answer_____B______answer-content textarea:hover {
     border-bottom-color: blue;
 }
 
-.user-excercises_create-new__QandA___content____answer_____B______answer-content input:focus {
+.user-excercises_create-new__QandA___content____answer_____B______answer-content textarea:focus {
     border-bottom-color: green;
 }
 
@@ -335,7 +337,7 @@
     display: flex;
     flex-direction: row;
     justify-content: stretch;
-    align-items: flex-start;
+    align-items: flex-end;
     margin: 20px 0 0 40px;
     /* border: groove; */
     width: 94%;
@@ -350,20 +352,20 @@
     text-align: left;
 }
 
-.user-excercises_create-new__QandA___content____answer_____C______answer-content input {
+.user-excercises_create-new__QandA___content____answer_____C______answer-content textarea {
     margin: 0 0 0 16px;
     border: none;
     border-bottom: 1px solid black;
     outline: none;
-    height: 24px;
+    height: 28px;
     width: 85%;
 }
 
-.user-excercises_create-new__QandA___content____answer_____C______answer-content input:hover {
+.user-excercises_create-new__QandA___content____answer_____C______answer-content textarea:hover {
     border-bottom-color: blue;
 }
 
-.user-excercises_create-new__QandA___content____answer_____C______answer-content input:focus {
+.user-excercises_create-new__QandA___content____answer_____C______answer-content textarea:focus {
     border-bottom-color: green;
 }
 
@@ -371,7 +373,7 @@
     display: flex;
     flex-direction: row;
     justify-content: stretch;
-    align-items: flex-start;
+    align-items: flex-end;
     margin: 20px 0 0 40px;
     /* border: groove; */
     width: 94%;
@@ -386,20 +388,20 @@
     text-align: left;
 }
 
-.user-excercises_create-new__QandA___content____answer_____D______answer-content input {
+.user-excercises_create-new__QandA___content____answer_____D______answer-content textarea {
     margin: 0 0 0 16px;
     border: none;
     border-bottom: 1px solid black;
     outline: none;
-    height: 24px;
+    height: 28px;
     width: 85%;
 }
 
-.user-excercises_create-new__QandA___content____answer_____D______answer-content input:hover {
+.user-excercises_create-new__QandA___content____answer_____D______answer-content textarea:hover {
     border-bottom-color: blue;
 }
 
-.user-excercises_create-new__QandA___content____answer_____D______answer-content input:focus {
+.user-excercises_create-new__QandA___content____answer_____D______answer-content textarea:focus {
     border-bottom-color: green;
 }
 

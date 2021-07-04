@@ -8,6 +8,10 @@ import TeamMemberChatItem from "./TeamMemberChatItem";
 export default class TeamMemberChat extends React.Component {
   constructor(props) {
     super(props);
+    this.mounted = false;
+    this.semounted = false;
+    this.axiosmounted = false;
+    this.nextpropsmounted = false;
     this.state = {
       TeamMemberChatContent: "",
       CurrentTeamMemberRoomChatList: [],
@@ -18,7 +22,8 @@ export default class TeamMemberChat extends React.Component {
       NumberMemberChatContent: "5",
       checkBannedOfMemberIsOpen: false,
       checkBannedOfMemberChatIsOpen: false,
-      checkUnBannedOfMemberIsOpen: false
+      checkUnBannedOfMemberIsOpen: false,
+      checkLoadingMemberChatContent: false
     };
   }
 
@@ -59,6 +64,8 @@ export default class TeamMemberChat extends React.Component {
   };
 
   componentDidMount = () => {
+    this.axiosmounted = true;
+
     axios
       .post("/getteamlist/getteammemberchatlist", {
         MemberChatID: this.props.MemberChoiceChatID,
@@ -68,13 +75,21 @@ export default class TeamMemberChat extends React.Component {
         NumberMemberChatContent: this.state.NumberMemberChatContent
       })
       .then(res => {
-        this.setState({
-          CurrentTeamMemberRoomChatList: res.data.CurrentRoomChatContent,
-          CheckNextRenderChatContent: res.data.CheckNextRenderChatContent,
-          BannedOfMember: res.data.BannedOfMember,
-          BannedOfMemberChat: res.data.BannedOfMemberChat
-        });
+        if (this.axiosmounted) {
+          this.setState({
+            CurrentTeamMemberRoomChatList: res.data.CurrentRoomChatContent,
+            CheckNextRenderChatContent: res.data.CheckNextRenderChatContent,
+            BannedOfMember: res.data.BannedOfMember,
+            BannedOfMemberChat: res.data.BannedOfMemberChat
+          });
+        }
       });
+
+    this.timeout = setTimeout(() => {
+      this.setState({
+        checkLoadingMemberChatContent: true
+      });
+    }, 900);
 
     this.mounted = true;
     this.semounted = true;
@@ -117,6 +132,12 @@ export default class TeamMemberChat extends React.Component {
 
   UNSAFE_componentWillReceiveProps = nextProps => {
     if (nextProps.MemberChoiceChatID !== this.props.MemberChoiceChatID) {
+      this.setState({
+        checkLoadingMemberChatContent: false
+      });
+
+      this.nextpropsmounted = true;
+
       axios
         .post("/getteamlist/getteammemberchatlist", {
           MemberChatID: nextProps.MemberChoiceChatID,
@@ -126,19 +147,36 @@ export default class TeamMemberChat extends React.Component {
           NumberMemberChatContent: this.state.NumberMemberChatContent
         })
         .then(res => {
-          this.setState({
-            CurrentTeamMemberRoomChatList: res.data.CurrentRoomChatContent,
-            CheckNextRenderChatContent: res.data.CheckNextRenderChatContent,
-            BannedOfMember: res.data.BannedOfMember,
-            BannedOfMemberChat: res.data.BannedOfMemberChat
-          });
+          if (this.nextpropsmounted) {
+            this.setState({
+              CurrentTeamMemberRoomChatList: res.data.CurrentRoomChatContent,
+              CheckNextRenderChatContent: res.data.CheckNextRenderChatContent,
+              BannedOfMember: res.data.BannedOfMember,
+              BannedOfMemberChat: res.data.BannedOfMemberChat
+            });
+          }
+        })
+        .catch(error => console.log(error));
+
+      this.nextpropstimeout = setTimeout(() => {
+        this.setState({
+          checkLoadingMemberChatContent: true
         });
+      }, 900);
     }
   };
 
   componentWillUnmount = () => {
     this.mounted = false;
     this.semounted = false;
+    this.axiosmounted = false;
+    this.nextpropsmounted = false;
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
+    if (this.nextpropstimeout) {
+      clearTimeout(this.nextpropstimeout);
+    }
   };
 
   handleTeamMemberChatContent = event => {
@@ -193,7 +231,7 @@ export default class TeamMemberChat extends React.Component {
     });
   };
 
-  renderTeamMemberChat = () => {
+  renderTeamMemberChatName = () => {
     return (
       <div>
         <div className="user-team_team-menu-and-content__content___discuss____member-chat______avatar-fullname">
@@ -213,56 +251,72 @@ export default class TeamMemberChat extends React.Component {
             <i className="material-icons">&#xe5cd;</i>
           </div>
         </div>
+      </div>
+    );
+  };
 
-        <div className="user-team_team-menu-and-content__content___discuss____member-chat______team-chat-content">
-          {!this.state.CurrentTeamMemberRoomChatList.length ? (
-            <p style={{ fontWeight: "bold", fontSize: "12px" }}>
-              Hãy nhắn tin để liên lạc với bạn này
-            </p>
-          ) : (
-            <div>
-              <div
-                style={
-                  this.state.CheckNextRenderChatContent
-                    ? { display: "block" }
-                    : { display: "none" }
-                }
-                onClick={() => this.sendToSeeOldMemberChatContent()}
-                className="user-team_team-menu-and-content__content___discuss____member-chat______team-chat-content_______seen-old-member-chat"
-              >
-                <p>Xem thêm các Tin nhắn cũ !!!</p>
-              </div>
-              {this.state.CurrentTeamMemberRoomChatList.map(
-                (roomchatitem, roomchatindex) => (
-                  <div key={roomchatindex}>
-                    <TeamMemberChatItem
-                      MemberChattedID={roomchatitem.MemberChattedID}
-                      MemberChattedContent={roomchatitem.MemberChattedContent}
-                      MemberChattedDate={roomchatitem.MemberChattedDate}
-                      MemberID={this.props.MemberID}
-                      MemberChoiceChatID={this.props.MemberChoiceChatID}
-                    />
+  renderTeamMemberChat = () => {
+    return (
+      <div style={{ width: "100%", height: "240px" }}>
+        {this.state.checkLoadingMemberChatContent ? (
+          <div>
+            <div className="user-team_team-menu-and-content__content___discuss____member-chat______team-chat-content">
+              {!this.state.CurrentTeamMemberRoomChatList.length ? (
+                <p style={{ fontWeight: "bold", fontSize: "12px" }}>
+                  Hãy nhắn tin để liên lạc với bạn này
+                </p>
+              ) : (
+                <div>
+                  <div
+                    style={
+                      this.state.CheckNextRenderChatContent
+                        ? { display: "block" }
+                        : { display: "none" }
+                    }
+                    onClick={() => this.sendToSeeOldMemberChatContent()}
+                    className="user-team_team-menu-and-content__content___discuss____member-chat______team-chat-content_______seen-old-member-chat"
+                  >
+                    <p>Xem thêm các Tin nhắn cũ !!!</p>
                   </div>
-                )
+                  {this.state.CurrentTeamMemberRoomChatList.map(
+                    (roomchatitem, roomchatindex) => (
+                      <div key={roomchatindex}>
+                        <TeamMemberChatItem
+                          MemberChattedID={roomchatitem.MemberChattedID}
+                          MemberChattedContent={
+                            roomchatitem.MemberChattedContent
+                          }
+                          MemberChattedDate={roomchatitem.MemberChattedDate}
+                          MemberID={this.props.MemberID}
+                          MemberChoiceChatID={this.props.MemberChoiceChatID}
+                        />
+                      </div>
+                    )
+                  )}
+                </div>
               )}
             </div>
-          )}
-        </div>
-        <div className="user-team_team-menu-and-content__content___discuss____member-chat______send-message">
-          <div>
-            <input
-              type="text"
-              placeholder="Nhập tin nhắn..."
-              maxLength="2000"
-              onChange={event => this.handleTeamMemberChatContent(event)}
-              onKeyPress={event => this.pressEnterSendMessageContent(event)}
-              value={this.state.TeamMemberChatContent}
-            />
+            <div className="user-team_team-menu-and-content__content___discuss____member-chat______send-message">
+              <div>
+                <input
+                  type="text"
+                  placeholder="Nhập tin nhắn..."
+                  maxLength="2000"
+                  onChange={event => this.handleTeamMemberChatContent(event)}
+                  onKeyPress={event => this.pressEnterSendMessageContent(event)}
+                  value={this.state.TeamMemberChatContent}
+                />
+              </div>
+              <div onClick={() => this.sendMessageToTeamMemberChat()}>
+                <i className="material-icons">&#xe163;</i>
+              </div>
+            </div>
           </div>
-          <div onClick={() => this.sendMessageToTeamMemberChat()}>
-            <i className="material-icons">&#xe163;</i>
-          </div>
-        </div>
+        ) : (
+          <p style={{ fontWeight: "bold", fontSize: "12px", color: "blue" }}>
+            Đang tải nội dung cuộc trò chuyện...
+          </p>
+        )}
       </div>
     );
   };
@@ -275,6 +329,7 @@ export default class TeamMemberChat extends React.Component {
           bounds={{ top: -300, left: 0, right: 600, bottom: 0 }}
         >
           <div className="user-team_team-menu-and-content__content___discuss____member-chat">
+            {this.renderTeamMemberChatName()}
             {this.renderTeamMemberChat()}
           </div>
         </Draggable>

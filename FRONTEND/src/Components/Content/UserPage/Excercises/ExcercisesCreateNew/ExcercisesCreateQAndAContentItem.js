@@ -110,10 +110,10 @@ export default class ExcercisesCreateQAndAContentItem extends React.Component {
       <div className="user-excercises_create-new__QandA___content">
         <div className="user-excercises_create-new__QandA___content___question">
           <p>Câu hỏi số {this.props.ExcerciseNthQuestion}: </p>
-          <input
+          <textarea
             type="text"
             name="ExcerciseQuestionContent"
-            maxLength="200"
+            maxLength="1000"
             value={
               this.props.ExcerciseQuestionContent === "" ||
               this.state.changeToEditMode
@@ -142,10 +142,10 @@ export default class ExcercisesCreateQAndAContentItem extends React.Component {
             </div>
             <div className="user-excercises_create-new__QandA___content____answer_____A______answer-content">
               <span>Đáp án A: </span>
-              <input
+              <textarea
                 type="text"
                 name="ExcerciseAnswerContentA"
-                maxLength="200"
+                maxLength="500"
                 value={
                   this.props.ExcerciseAnswerContentA === "" ||
                   this.state.changeToEditMode
@@ -174,10 +174,10 @@ export default class ExcercisesCreateQAndAContentItem extends React.Component {
             </div>
             <div className="user-excercises_create-new__QandA___content____answer_____B______answer-content">
               <span>Đáp án B: </span>
-              <input
+              <textarea
                 type="text"
                 name="ExcerciseAnswerContentB"
-                maxLength="200"
+                maxLength="500"
                 value={
                   this.props.ExcerciseAnswerContentB === "" ||
                   this.state.changeToEditMode
@@ -206,10 +206,10 @@ export default class ExcercisesCreateQAndAContentItem extends React.Component {
             </div>
             <div className="user-excercises_create-new__QandA___content____answer_____C______answer-content">
               <span>Đáp án C: </span>
-              <input
+              <textarea
                 type="text"
                 name="ExcerciseAnswerContentC"
-                maxLength="200"
+                maxLength="500"
                 value={
                   this.props.ExcerciseAnswerContentC === "" ||
                   this.state.changeToEditMode
@@ -238,10 +238,10 @@ export default class ExcercisesCreateQAndAContentItem extends React.Component {
             </div>
             <div className="user-excercises_create-new__QandA___content____answer_____D______answer-content">
               <span>Đáp án D: </span>
-              <input
+              <textarea
                 type="text"
                 name="ExcerciseAnswerContentD"
-                maxLength="200"
+                maxLength="500"
                 value={
                   this.props.ExcerciseAnswerContentD === "" ||
                   this.state.changeToEditMode

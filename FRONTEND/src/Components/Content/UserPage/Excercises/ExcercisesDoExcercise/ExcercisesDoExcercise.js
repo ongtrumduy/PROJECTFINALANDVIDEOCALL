@@ -10,6 +10,7 @@ import ExcercisesResultDidExcerciseContent from "./ExcercisesResultExcercise/Exc
 export default class ExcercisesDoExcercise extends React.Component {
   constructor(props) {
     super(props);
+    this.axiosmounted = false;
     this.state = {
       chooseExcerciseDoOrFinished: "",
       ExcerciseAllQAContent: [],
@@ -18,32 +19,46 @@ export default class ExcercisesDoExcercise extends React.Component {
       ExcerciseType: "",
       ExcerciseLogo: "",
       ExcerciseMemberDidResult: "",
-      ExcerciseAllAnswerContent: []
+      ExcerciseAllAnswerContent: [],
+      checkLoadingAllQAContent: false
     };
   }
 
   componentDidMount = () => {
+    this.axiosmounted = true;
+
     axios
       .post("/getallquestionanswercontent", {
         MemberID: this.props.MemberID,
         ExcerciseID: this.props.ExcerciseID
       })
       .then(res => {
-        console.log(
-          "Ra dữ liệu cái NumberQuestion cho tao ",
-          res.data.ExcerciseNumberQuestion
-        );
-        this.setState({
-          ExcerciseAllQAContent: res.data.ExcerciseAllQAContent,
-          ExcerciseName: res.data.ExcerciseName,
-          ExcerciseNumberQuestion: res.data.ExcerciseNumberQuestion,
-          ExcerciseType: res.data.ExcerciseType,
-          ExcerciseLogo: res.data.ExcerciseLogo
-        });
+        if (this.axiosmounted) {
+          this.setState({
+            ExcerciseAllQAContent: res.data.ExcerciseAllQAContent,
+            ExcerciseName: res.data.ExcerciseName,
+            ExcerciseNumberQuestion: res.data.ExcerciseNumberQuestion,
+            ExcerciseType: res.data.ExcerciseType,
+            ExcerciseLogo: res.data.ExcerciseLogo
+          });
+        }
       })
       .catch(error => {
         console.log(error);
       });
+
+    this.timeout = setTimeout(() => {
+      this.setState({
+        checkLoadingAllQAContent: true
+      });
+    }, 1000);
+  };
+
+  componentWillUnmount = () => {
+    this.axiosmounted = false;
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
   };
 
   updateRenderExcerciseDoExcerciseControl = state => {
@@ -165,8 +180,16 @@ export default class ExcercisesDoExcercise extends React.Component {
 
   render() {
     return (
-      <div className="user-excercises_do-excercise">
-        {this.renderExcerciseDoExcersiceDoOrFinished()}
+      <div>
+        {this.state.checkLoadingAllQAContent ? (
+          <div className="user-excercises_do-excercise">
+            {this.renderExcerciseDoExcersiceDoOrFinished()}
+          </div>
+        ) : (
+          <p style={{ color: "blue", fontWeight: "bold", userSelect: "none" }}>
+            Đang tải dữ liệu Câu hỏi và trả lời...
+          </p>
+        )}
       </div>
     );
   }

@@ -133,16 +133,15 @@ export default class TeamSettingTeamName extends React.Component {
 
   componentDidMount = () => {
     this.mounted = true;
-
-    this.props.ChooseTeamInfor.map(teaminforitem => {
-      if (this.mounted) {
+    if (this.mounted) {
+      this.props.ChooseTeamInfor.map(teaminforitem => {
         return this.setState({
           TeamName: teaminforitem.TeamName,
           TeamDescription: teaminforitem.TeamDescription,
           TeamType: teaminforitem.TeamType
         });
-      }
-    });
+      });
+    }
   };
 
   componentWillUnmount = () => {

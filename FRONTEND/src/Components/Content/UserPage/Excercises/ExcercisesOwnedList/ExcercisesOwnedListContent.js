@@ -72,7 +72,7 @@ export default class ExcercisesOwnedListContent extends React.Component {
       this.setState({
         checkLoadingExcerciseOwnedList: true
       });
-    }, 1000);
+    }, 2000);
 
     this.semounted = true;
     this.mounted = true;
@@ -149,9 +149,7 @@ export default class ExcercisesOwnedListContent extends React.Component {
   choiceExcerciseOwnedItemToDetail = excerciseID => {
     this.props.getExcerciseOwnedIDMemberChoice(excerciseID);
 
-    setTimeout(() => {
-      this.props.updateRenderExcerciseOwnedControl("owneditem");
-    }, 800);
+    this.props.updateRenderExcerciseOwnedControl("owneditem");
   };
 
   renderIndexOfExcerciseItemList = () => {
@@ -186,7 +184,7 @@ export default class ExcercisesOwnedListContent extends React.Component {
       currentIndexOfChoiceIndexExcerciseList.length < 5
     ) {
       return (
-        <div className="user-excercises_all__public-list___control____index-item">
+        <div className="user-excercises_all__owned-list___control____index-item">
           {currentIndexOfChoiceIndexExcerciseList.map(numberindexitem => (
             <div
               style={
@@ -205,7 +203,7 @@ export default class ExcercisesOwnedListContent extends React.Component {
       );
     } else {
       return (
-        <div className="user-excercises_all__public-list___control____index-item">
+        <div className="user-excercises_all__owned-list___control____index-item">
           {currentIndexOfChoiceIndexExcerciseList.map(numberindexitem => (
             <div
               style={
@@ -228,7 +226,7 @@ export default class ExcercisesOwnedListContent extends React.Component {
 
   selectIndexForRenderExcerciseItem = () => {
     return (
-      <div className="user-excercises_all__public-list___control">
+      <div className="user-excercises_all__owned-list___control">
         <div>
           <i
             style={
@@ -262,7 +260,7 @@ export default class ExcercisesOwnedListContent extends React.Component {
 
   renderChooseIndexExcercisePublicList = () => {
     return (
-      <div className="user-excercises_all__public-list___choice-index-content">
+      <div className="user-excercises_all__owned-list___choice-index-content">
         {this.state.CurrentExcerciseChoiceOwnedList.map(
           (excerciseitem, excerciseindex) => (
             <div
@@ -355,13 +353,19 @@ export default class ExcercisesOwnedListContent extends React.Component {
   renderExcerciseOwnedListContent = () => {
     if (this.state.AllNumberExcercise === 0) {
       return (
-        <div style={{ textAlign: "center", fontWeight: "bold" }}>
+        <div
+          style={{
+            textAlign: "center",
+            fontWeight: "bold",
+            userSelect: "none"
+          }}
+        >
           <p>Chưa có Bộ đề - Bài tập nào trong danh sách</p>
         </div>
       );
     } else {
       return (
-        <div className="user-excercises_all__public-list___content">
+        <div className="user-excercises_all__owned-list___content">
           {this.renderChooseIndexExcercisePublicList()}
           {this.selectIndexForRenderExcerciseItem()}
         </div>
@@ -371,8 +375,8 @@ export default class ExcercisesOwnedListContent extends React.Component {
 
   render() {
     return (
-      <div className="user-excercises_all__public-list">
-        <div className="user-excercises_all__public-list___title">
+      <div className="user-excercises_all__owned-list">
+        <div className="user-excercises_all__owned-list___title">
           <p>Bộ đề - Bài tập Sở hữu</p>
         </div>
         {this.state.checkLoadingExcerciseOwnedList ? (
