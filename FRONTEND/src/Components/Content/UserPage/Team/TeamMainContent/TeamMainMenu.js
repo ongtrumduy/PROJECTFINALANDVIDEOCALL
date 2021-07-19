@@ -131,13 +131,12 @@ export default class TeamMainMenu extends React.Component {
           </button>
         </div>
         <div className="user-team_team-menu-and-content__callsetting">
-          {/* <Link to="/videocall">Gọi nhóm</Link> */}
           <div
-            style={
-              this.props.CheckMemberIsAdmin
-                ? { display: "block" }
-                : { display: "none" }
-            }
+            // style={
+            //   this.props.CheckMemberIsAdmin
+            //     ? { display: "block" }
+            //     : { display: "none" }
+            // }
             className="user-team_team-menu-and-content__callsetting___call"
           >
             <button onClick={() => this.startBeginCallVideoTeam()}>

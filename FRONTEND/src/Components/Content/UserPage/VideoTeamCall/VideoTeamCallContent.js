@@ -104,7 +104,7 @@ export default class VideoTeamCallContent extends Component {
     }
   };
 
-  //==================================confirmEstablishConnectCallSucess======================================================
+  //==================================confirmEstablishConnectCallSuccess======================================================
 
   connectCallSuccess = () => {
     this.props.socket.on("connection-call-success", data => {
@@ -149,6 +149,9 @@ export default class VideoTeamCallContent extends Component {
 
     (async () => {
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
+
+    // (async () => {
+    //   const stream = await navigator.mediaDevices.getDisplayMedia(constraints);
 
       success(stream);
     })().catch(failure);
@@ -492,7 +495,7 @@ export default class VideoTeamCallContent extends Component {
     // );
 
     return (
-      <div>
+      <div style={{ width: "100%", height: "100%" }}>
         {/* <Draggable
           bounds={{
             top: -300,
@@ -501,28 +504,28 @@ export default class VideoTeamCallContent extends Component {
             bottom: 300
           }}
         > */}
-          <Video
-            videoStyle={{
-              // zIndex: 2,
-              // position: "absolute",
-              // right: 0,
-              width: 200,
-              cursor: "move"
-              // height: 200,
-              // margin: 5,
-              // backgroundColor: "black"
-            }}
-            frameStyle={{
-              width: 200,
-              margin: 5,
-              borderRadius: 5,
-              backgroundColor: "black"
-            }}
-            showMuteControls={true}
-            videoStream={this.state.localStream}
-            autoPlay
-            muted
-          />
+        <Video
+          videoStyle={{
+            // zIndex: 2,
+            // position: "absolute",
+            // right: 0,
+            width: 200,
+            cursor: "move"
+            // height: 200,
+            // margin: 5,
+            // backgroundColor: "black"
+          }}
+          frameStyle={{
+            width: 200,
+            margin: 5,
+            borderRadius: 5,
+            backgroundColor: "black"
+          }}
+          showMuteControls={true}
+          videoStream={this.state.localStream}
+          autoPlay
+          muted
+        />
         {/* </Draggable> */}
 
         <Video

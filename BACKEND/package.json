@@ -9,6 +9,7 @@
     "start": "babel-node server1.js",
     "startbabel": "babel-node server.js",
     "startnode": "node src/server.js",
+    "starthttpserver": "babel-node server.js",
     "build": "babel A -d B",
     "callback": "babel-node callback.js",
     "promise": "babel-node promise.js",
